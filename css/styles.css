@@ -1,0 +1,544 @@
+@charset "UTF-8";
+/*********************************/
+/* _reset.scss - Reset/normalize */
+/*********************************/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #F2F2F2;
+  font-family: "Nunito", sans-serif;
+  font-size: 16px;
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 12px;
+  }
+}
+/****************************/
+/* _typo.scss - Tipografías */
+/****************************/
+/* Fuente ATLANTIDA */
+@font-face {
+  font-family: "OstrichSans-Heavy";
+  src: url(./fonts/OstrichSans-Heavy.otf);
+}
+/**************************/
+/* _common.scss - Comunes */
+/**************************/
+main h1, main h3, main h2 {
+  font-family: "OstrichSans-Heavy";
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+main h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.4rem;
+}
+main h3 {
+  font-size: 1.6rem;
+  margin-bottom: 0.3rem;
+}
+
+.tituloPagina hr {
+  color: #DC0054;
+}
+
+/* -------- */
+/* WHATSAPP */
+/* -------- */
+.whatsapp {
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+  z-index: 999;
+}
+.whatsapp a img {
+  width: 70px;
+}
+.whatsapp a img:hover {
+  transform: scale(1.1);
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 768px) {
+  main h1, main h2, main h3 {
+    font-size: 1.8rem;
+  }
+  main h2 {
+    font-size: 1.62rem;
+  }
+  main h3 {
+    font-size: 1.44rem;
+  }
+}
+/*************************/
+/* _header.scss - Header */
+/*************************/
+/* ------------------ */
+/* NAVBAR (BOOTSTRAP) */
+/* ------------------ */
+.navbar__estilos {
+  background-color: #006878;
+}
+
+.nav-link {
+  color: #ffffff;
+}
+.nav-link:hover {
+  opacity: 0.7;
+  transition: all 0.5s;
+}
+
+/*************************/
+/* _footer.scss - Footer */
+/*************************/
+/* ------------------ */
+/* FOOTER (BOOTSTRAP) */
+/* ------------------ */
+.footer__estilos {
+  background-color: #D9D9D9;
+}
+
+.footer__diveCenter {
+  font-size: 1rem;
+  padding: 20px 15px 0 15px;
+}
+
+.footer__redesSociales {
+  padding: 20px 15px 0 15px;
+}
+.footer__redesSociales a {
+  display: block;
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: #000000;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.footer__redesSociales a:hover {
+  color: #808080;
+  transform: translateY(-5px);
+  transition: 0.2s;
+}
+
+.footer__datosContacto {
+  padding: 0 15px;
+}
+.footer__datosContacto a {
+  color: #000000;
+  text-decoration: none;
+  font-size: 0.8rem;
+}
+.footer__datosContacto a:hover {
+  color: #808080;
+}
+.footer__datosContacto p {
+  color: #000000;
+  font-size: 0.8rem;
+}
+
+.footer__logoPadi img:hover {
+  opacity: 0.6;
+}
+
+.footer__derechos {
+  padding-bottom: 30px;
+  font-size: 0.8rem;
+}
+.footer__derechos a {
+  color: #000000;
+  text-decoration: none;
+}
+.footer__derechos a:hover {
+  color: #808080;
+}
+
+/***************************/
+/* _buttons.scss - Botones */
+/***************************/
+.btnMasInfo {
+  background-color: #DC0054;
+  color: #FFFFFF;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  transition: letter-spacing 0.5s, box-shadow 0.5s;
+}
+.btnMasInfo i {
+  display: inline-block;
+  margin-left: 10px;
+}
+.btnMasInfo:hover {
+  color: #FFFFFF;
+  letter-spacing: 0.1rem;
+  box-shadow: 0 4px 8px 0 rgba(220, 0, 84, 0.7);
+}
+
+/*********************/
+/* _home.scss - Home */
+/*********************/
+/* ------- */
+/* WELCOME */
+/* ------- */
+.welcome {
+  position: relative;
+  background-color: #006878;
+}
+
+.welcome__background--desktop {
+  display: block;
+  width: 100%;
+}
+
+.welcome__background--mobile {
+  display: none;
+  width: 100%;
+}
+
+.welcome__slide {
+  position: absolute;
+  top: 20px;
+  bottom: 20px;
+  left: 20px;
+  width: 29%;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #FFFFFF;
+}
+.welcome__slide p {
+  font-size: 1.1rem;
+  line-height: 1.1;
+}
+
+.carousel-indicators .welcome__slide--dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+}
+
+.welcome__logoPadi {
+  position: absolute;
+  bottom: 20px;
+  left: 31%;
+  width: 12%;
+}
+.welcome__logoPadi img {
+  display: block;
+  width: 100%;
+}
+
+.welcome__form {
+  position: absolute;
+  top: 20px;
+  bottom: 20px;
+  right: 20px;
+  width: 35%;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #FFFFFF;
+}
+.welcome__form fieldset {
+  padding: 10px;
+}
+.welcome__form fieldset input, .welcome__form fieldset select, .welcome__form fieldset textarea {
+  margin-bottom: 10px;
+}
+.welcome__form fieldset textarea {
+  min-height: 50px;
+  max-height: 50px;
+  max-width: 100%;
+  min-width: 100%;
+}
+.welcome__form legend {
+  font-family: "OstrichSans-Heavy";
+  font-size: 1.8rem;
+}
+.welcome__form .form-control:focus {
+  box-shadow: 0 0 0 0.25rem rgba(0, 104, 120, 0.25);
+}
+
+/* ----------------------------------- */
+/* CURSOS Y ESPECIALIDADES (BOOTSTRAP) */
+/* ----------------------------------- */
+.introCursosEspecialidades, .introNosotros {
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 104, 120, 0.7);
+  border-radius: 10px;
+}
+.introCursosEspecialidades hr, .introNosotros hr {
+  color: #DC0054;
+}
+
+/* ------------------ */
+/* VIAJES (BOOTSTRAP) */
+/* ------------------ */
+.introViajes {
+  width: 100%;
+  margin: auto;
+  padding: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 104, 120, 0.7);
+  border-radius: 10px;
+}
+.introViajes hr {
+  color: #DC0054;
+}
+.introViajes img {
+  width: 100%;
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 930px) {
+  .welcome__form fieldset input, .welcome__form fieldset select, .welcome__form fieldset textarea {
+    margin-bottom: 7px;
+    font-size: 0.9rem;
+    padding: 2px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .welcome__background--desktop {
+    display: none;
+  }
+  .welcome__background--mobile {
+    display: block;
+  }
+  .welcome__slide {
+    top: 40%;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+  }
+  .welcome__slide p {
+    font-size: 1rem;
+    line-height: 1;
+  }
+  .welcome__logoPadi {
+    top: 10px;
+    left: 75%;
+    width: 20%;
+  }
+  .welcome__form {
+    display: none;
+  }
+}
+/*************************/
+/* _cursos.scss - Cursos */
+/*************************/
+/* ------------------ */
+/* CURSOS (BOOTSTRAP) */
+/* ------------------ */
+.cursos__flex--der, .cursos__flex--izq {
+  width: 100%;
+  max-width: 450px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 8px 0 rgba(0, 104, 120, 0.7);
+  border-radius: 12px;
+}
+
+.cursos__flex--izq hr {
+  color: #DC0054;
+}
+
+.cursos__flex--der {
+  background-color: #006878;
+  color: #FFFFFF;
+}
+.cursos__flex--der a {
+  margin: 10px auto;
+}
+.cursos__flex--der a img {
+  display: block;
+  width: 100%;
+  border-radius: 12px;
+  transition: filter 0.5s;
+}
+.cursos__flex--der a img:hover {
+  filter: brightness(1.2);
+}
+
+.flexLista {
+  display: flex;
+  flex-direction: row;
+  margin: 10px 0;
+}
+.flexLista__ico {
+  width: 32px;
+  height: 32px;
+  background-image: url(../images/logo-pestania.ico);
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-right: 10px;
+  margin-bottom: 25px;
+}
+.flexLista__texto {
+  width: 100%;
+  margin-bottom: 25px;
+  text-align: justify;
+}
+
+/*************************/
+/* _viajes.scss - Viajes */
+/*************************/
+/* ------------------ */
+/* VIAJES (BOOTSTRAP) */
+/* ------------------ */
+.viajes__welcome {
+  box-shadow: 0 4px 8px 0 rgba(0, 104, 120, 0.7);
+  border-radius: 10px;
+}
+
+.viajes__temp2021 h2, .viajes__temp2022 h2 {
+  background-color: #DC0054;
+  color: #FFFFFF;
+  border-radius: 10px;
+  width: 30%;
+  padding: 10px;
+  margin: auto;
+}
+.viajes__temp2021 h3, .viajes__temp2022 h3 {
+  background-color: #006878;
+  color: #FFFFFF;
+  border-radius: 10px;
+  width: 65%;
+  padding: 10px;
+  margin: 40px auto 10px auto;
+}
+
+.viaje__galeria {
+  display: grid;
+  grid-template-areas: "vgs1 vgs1 vgs2" "vgs1 vgs1 vgs3" "vgs4 vgs5 vgs6" "vgs7 vgs9 vgs9" "vgs8 vgs9 vgs9";
+  grid-row-gap: 20px;
+  grid-column-gap: 20px;
+  width: 60%;
+  margin-top: 20px;
+  margin: 20px auto;
+}
+
+.viaje__galeriaImg9 img, .viaje__galeriaImg8 img, .viaje__galeriaImg7 img, .viaje__galeriaImg6 img, .viaje__galeriaImg5 img, .viaje__galeriaImg4 img, .viaje__galeriaImg3 img, .viaje__galeriaImg2 img, .viaje__galeriaImg1 img {
+  border-radius: 5px;
+  width: 100%;
+  display: block;
+}
+
+.viaje__galeriaImg1 {
+  grid-area: vgs1;
+}
+
+.viaje__galeriaImg2 {
+  grid-area: vgs2;
+}
+
+.viaje__galeriaImg3 {
+  grid-area: vgs3;
+}
+
+.viaje__galeriaImg4 {
+  grid-area: vgs4;
+}
+
+.viaje__galeriaImg5 {
+  grid-area: vgs5;
+}
+
+.viaje__galeriaImg6 {
+  grid-area: vgs6;
+}
+
+.viaje__galeriaImg7 {
+  grid-area: vgs7;
+}
+
+.viaje__galeriaImg8 {
+  grid-area: vgs8;
+}
+
+.viaje__galeriaImg9 {
+  grid-area: vgs9;
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 768px) {
+  .viajes__temp2021 h2, .viajes__temp2022 h2 {
+    width: 60%;
+  }
+  .viajes__temp2021 h3, .viajes__temp2022 h3 {
+    width: 80%;
+  }
+  .viaje__galeria {
+    grid-template-areas: "vgs1" "vgs2" "vgs3" "vgs4" "vgs5" "vgs6" "vgs7" "vgs8" "vgs9";
+    width: 95%;
+  }
+}
+/*****************************/
+/* _nosotros.scss - Nosotros */
+/*****************************/
+/* -------------------- */
+/* NOSOTROS (BOOTSTRAP) */
+/* -------------------- */
+.nosotros__welcome {
+  box-shadow: 0 4px 8px 0 rgba(0, 104, 120, 0.7);
+  border-radius: 10px;
+}
+
+.staff__card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+.staff__card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.staff__cardDatos {
+  padding: 2px 16px;
+}
+.staff__cardDatos h3 {
+  text-align: left;
+}
+
+/*****************************/
+/* _contacto.scss - Contacto */
+/*****************************/
+.contacto__form {
+  box-shadow: 0 4px 8px 0 rgba(0, 104, 120, 0.7);
+  border-radius: 10px;
+}
+.contacto__form fieldset {
+  padding: 10px;
+}
+.contacto__form fieldset input, .contacto__form fieldset select, .contacto__form fieldset textarea {
+  margin-bottom: 10px;
+}
+.contacto__form fieldset textarea {
+  min-height: 100px;
+  max-height: 100px;
+  max-width: 100%;
+  min-width: 100%;
+}
+.contacto__form fieldset legend {
+  font-family: "OstrichSans-Heavy";
+  font-size: 1.8rem;
+}
+.contacto__form fieldset .form-control:focus {
+  box-shadow: 0 0 0 0.25rem rgba(0, 104, 120, 0.25);
+}
+
+.ubicacion hr {
+  color: #DC0054;
+}
+.ubicacion iframe {
+  width: 100%;
+  box-shadow: 0 4px 8px 0 rgba(0, 104, 120, 0.7);
+  border-radius: 10px;
+}
+
+/*# sourceMappingURL=styles.css.map */

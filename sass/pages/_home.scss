@@ -1,0 +1,171 @@
+/*********************/
+/* _home.scss - Home */
+/*********************/
+
+/* ------- */
+/* WELCOME */
+/* ------- */
+.welcome {
+	position: relative;
+	background-color: $colorATLVerde;
+}
+
+.welcome__background--desktop {
+	display: block;
+	width: 100%;
+}
+
+.welcome__background--mobile {
+	display: none;
+    width: 100%;
+}
+
+.welcome__slide {
+	position: absolute;
+	top: 20px;
+	bottom: 20px;
+	left: 20px;
+	width: 29%;
+	padding: 20px;
+	background-color: rgba(0, 0, 0, 0.3);
+	color: #FFFFFF;
+
+    p {
+        font-size: 1.1rem;
+        line-height: 1.1;
+    }
+}
+
+.carousel-indicators {
+    .welcome__slide--dot {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+    }
+}
+
+.welcome__logoPadi {
+	position: absolute;
+	bottom: 20px;
+	left: 31%;
+	width: 12%;
+
+    img {
+        display: block;
+        width: 100%;
+    }
+}
+
+.welcome__form {
+	position: absolute;
+	top: 20px;
+	bottom: 20px;
+	right: 20px;
+	width: 35%;
+	padding: 10px;
+	background-color: rgba(0, 0, 0, 0.3);
+	color: #FFFFFF;
+
+    fieldset {
+        padding: 10px;
+    
+        input, select, textarea {
+            margin-bottom: 10px;
+        }
+    
+        textarea {
+            min-height: 50px;
+            max-height: 50px;
+            max-width: 100%;
+            min-width: 100%;
+        }
+    }
+
+	legend {
+		font-family: 'OstrichSans-Heavy';
+		font-size: 1.8rem;
+	}
+
+	.form-control:focus {
+		box-shadow: 0 0 0 .25rem rgba(0, 104, 120,.25);
+	}
+}
+
+/* ----------------------------------- */
+/* CURSOS Y ESPECIALIDADES (BOOTSTRAP) */
+/* ----------------------------------- */
+.introCursosEspecialidades, .introNosotros {
+	width: 80%;
+	margin: auto;
+	padding: 20px;
+	box-shadow: 0 4px 8px 0 rgba(0,104,120,0.7);
+	border-radius: 10px;
+
+    hr {
+        color: $colorATLRojo;
+    }
+}
+
+/* ------------------ */
+/* VIAJES (BOOTSTRAP) */
+/* ------------------ */
+.introViajes {
+	width: 100%;
+	margin: auto;
+	padding: 20px;
+	box-shadow: 0 4px 8px 0 rgba(0,104,120,0.7);
+	border-radius: 10px;
+
+    hr {
+        color: $colorATLRojo;
+    }
+    
+    img {
+        width: 100%;
+    }
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 930px) {
+	.welcome__form {
+		fieldset {
+			input, select, textarea {
+				margin-bottom: 7px;
+				font-size: 0.9rem;
+				padding: 2px;
+			}
+    	}
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.welcome__background--desktop {
+		display: none;
+	}
+	
+	.welcome__background--mobile {
+		display: block;
+	}
+
+	.welcome__slide {
+		top: 40%;
+		bottom: 0px;
+		left: 0px;
+		width: 100%;
+	
+        p {
+            font-size: 1rem;
+            line-height: 1;
+        }
+    }
+
+	.welcome__logoPadi {
+		top: 10px;
+		left: 75%;
+		width: 20%;
+	}
+
+	.welcome__form {
+		display: none;
+	}
+}

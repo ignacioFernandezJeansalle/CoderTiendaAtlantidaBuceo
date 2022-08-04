@@ -1,0 +1,22 @@
+/*********************************/
+/* _reset.scss - Reset/normalize */
+/*********************************/
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background: $colorBKGGris;
+	font-family: 'Nunito', sans-serif;
+	font-size: 16px;
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 768px) {
+	body {
+		font-size: 12px;
+	}
+}

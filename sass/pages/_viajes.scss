@@ -1,0 +1,89 @@
+/*************************/
+/* _viajes.scss - Viajes */
+/*************************/
+
+/* ------------------ */
+/* VIAJES (BOOTSTRAP) */
+/* ------------------ */
+.viajes__welcome {
+	box-shadow: 0 4px 8px 0 rgba(0,104,120,0.7);
+	border-radius: 10px;
+}
+
+.viajes__temp2021, .viajes__temp2022 {
+    h2 {
+        background-color: $colorATLRojo;
+        color: #FFFFFF;
+        border-radius: 10px;
+        width: 30%;
+        padding: 10px;
+        margin: auto;
+    }
+
+    h3 {
+        background-color: $colorATLVerde;
+        color: #FFFFFF;
+        border-radius: 10px;
+        width: 65%;
+        padding: 10px;
+        margin: 40px auto 10px auto;
+    }
+}
+
+.viaje__galeria {
+	display: grid;
+	grid-template-areas: 
+		"vgs1 vgs1 vgs2"
+		"vgs1 vgs1 vgs3"
+		"vgs4 vgs5 vgs6"
+		"vgs7 vgs9 vgs9"
+		"vgs8 vgs9 vgs9";
+	grid-row-gap: 20px;
+	grid-column-gap: 20px;
+	width: 60%;
+	margin-top: 20px;
+	margin: 20px auto;
+}
+
+%galeriaImg {
+	border-radius: 5px;
+	width: 100%;
+	display: block;
+}
+
+@for $i from 1 through 9 {
+	.viaje__galeriaImg#{$i} {
+		grid-area: vgs#{$i};
+	}
+
+	.viaje__galeriaImg#{$i} img {
+		@extend %galeriaImg;
+	}
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 768px) {
+	.viajes__temp2021, .viajes__temp2022 {
+		h2 {
+			width: 60%;
+		}
+		
+		h3 {
+			width: 80%;
+		}	
+	}
+
+	.viaje__galeria {
+		grid-template-areas: 
+			"vgs1"
+			"vgs2"
+			"vgs3"
+			"vgs4"
+			"vgs5"
+			"vgs6"
+			"vgs7"
+			"vgs8"
+			"vgs9";
+		width: 95%;
+	}
+}

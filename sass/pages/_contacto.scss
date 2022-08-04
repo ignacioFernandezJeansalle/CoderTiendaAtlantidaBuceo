@@ -1,0 +1,44 @@
+/*****************************/
+/* _contacto.scss - Contacto */
+/*****************************/
+
+.contacto__form {
+	box-shadow: 0 4px 8px 0 rgba(0,104,120,0.7);
+	border-radius: 10px;
+
+    fieldset {
+        padding: 10px;
+
+        input, select, textarea {
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            min-height: 100px;
+            max-height: 100px;
+            max-width: 100%;
+            min-width: 100%;
+        }
+
+        legend {
+            font-family: 'OstrichSans-Heavy';
+            font-size: 1.8rem;
+        }
+    
+        .form-control:focus {
+            box-shadow: 0 0 0 .25rem rgba(0, 104, 120,.25);
+        }
+    }   
+}
+
+.ubicacion {
+    hr {
+        color: $colorATLRojo;
+    }
+    
+    iframe {
+        width: 100%;
+        box-shadow: 0 4px 8px 0 rgba(0,104,120,0.7);
+        border-radius: 10px;
+    }
+}

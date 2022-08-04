@@ -1,0 +1,19 @@
+/*************************/
+/* _header.scss - Header */
+/*************************/
+
+/* ------------------ */
+/* NAVBAR (BOOTSTRAP) */
+/* ------------------ */
+.navbar__estilos {
+	background-color: $colorATLVerde;
+}
+
+.nav-link {
+	color: #ffffff;
+    
+    &:hover {
+        opacity: 0.7;
+        transition: all 0.5s;
+    }
+}

@@ -1,0 +1,71 @@
+/*************************/
+/* _footer.scss - Footer */
+/*************************/
+
+/* ------------------ */
+/* FOOTER (BOOTSTRAP) */
+/* ------------------ */
+.footer__estilos {
+	background-color: #D9D9D9;
+}
+
+.footer__diveCenter {
+	font-size: 1rem;
+	padding: 20px 15px 0 15px;
+}
+
+.footer__redesSociales {
+	padding: 20px 15px 0 15px;
+
+    a {
+        display: block;
+        text-decoration: none;
+        font-size: 1.5rem;
+        color: #000000;
+        padding-left: 10px;
+        padding-right: 10px;
+
+        &:hover {
+            color: #808080;
+            transform: translateY(-5px);
+            transition: 0.2s;
+        }
+    }
+}
+
+.footer__datosContacto {
+	padding: 0 15px;
+
+    a {
+        color: #000000;
+        text-decoration: none;
+        font-size: 0.8rem;
+    
+        &:hover {
+            color: #808080;
+        }
+    }
+
+    p {
+        color: #000000;
+        font-size: 0.8rem;
+    }
+}
+
+.footer__logoPadi img:hover {
+	opacity: 0.6;
+}
+
+.footer__derechos {
+	padding-bottom: 30px;
+	font-size: 0.8rem;
+
+    a {
+        color: #000000;
+        text-decoration: none;
+
+        &:hover {
+            color: #808080;
+        }
+    }
+}

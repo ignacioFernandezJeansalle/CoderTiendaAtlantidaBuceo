@@ -1,0 +1,65 @@
+/*************************/
+/* _cursos.scss - Cursos */
+/*************************/
+
+/* ------------------ */
+/* CURSOS (BOOTSTRAP) */
+/* ------------------ */
+%cursos__flex {
+	width: 100%;
+	max-width: 450px;
+	padding: 20px;
+	@include d-flex (column);
+	box-shadow: 0 4px 8px 0 rgba(0,104,120,0.7);
+	border-radius: 12px;
+}
+
+.cursos__flex--izq {
+	@extend %cursos__flex;
+	
+	hr {
+		color: $colorATLRojo;
+	}
+}
+
+.cursos__flex--der {
+	@extend %cursos__flex;
+	background-color: $colorATLVerde;
+	color: #FFFFFF;
+
+    a {
+        margin: 10px auto;
+        
+        img {
+            display: block;
+            width: 100%;
+            border-radius: 12px;
+            transition: filter 0.5s;
+        
+            &:hover {
+                filter: brightness(1.2);
+            }
+        }
+    }
+}
+
+.flexLista {
+	@include d-flex (row);
+	margin: 10px 0;
+
+	&__ico {
+		width: 32px;
+		height: 32px;
+		background-image: url(../images/logo-pestania.ico);
+		background-repeat: no-repeat;
+		background-size: contain;
+		margin-right: 10px;
+		margin-bottom: 25px;
+	}
+	
+	&__texto {
+		width: 100%;
+		margin-bottom: 25px;
+		text-align: justify;
+	}
+}

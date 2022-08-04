@@ -1,0 +1,72 @@
+/**************************/
+/* _common.scss - Comunes */
+/**************************/
+$map-h1-h2-h3: (
+    fuente: 'OstrichSans-Heavy',
+    tamanoFuente: 2rem,
+    tamanoFuenteMobile: 1.8rem,
+    margenInferior: 0.5rem,
+    alineacion: center
+    );
+
+main {
+    h1 {
+        font-family: map-get($map-h1-h2-h3, fuente);
+        font-size: map-get($map-h1-h2-h3, tamanoFuente);
+        margin-bottom: map-get($map-h1-h2-h3, margenInferior);
+        text-align: map-get($map-h1-h2-h3, alineacion);
+    }
+
+    h2 {
+        @extend h1;
+        font-size: map-get($map-h1-h2-h3, tamanoFuente)*0.9;
+        margin-bottom: map-get($map-h1-h2-h3, margenInferior)-0.1rem;
+    }
+
+    h3 {
+        @extend h1;
+        font-size: map-get($map-h1-h2-h3, tamanoFuente)*0.8;
+        margin-bottom: map-get($map-h1-h2-h3, margenInferior)-0.2rem;
+    }
+}
+
+.tituloPagina hr {
+	color: $colorATLRojo;	
+}
+
+/* -------- */
+/* WHATSAPP */
+/* -------- */
+.whatsapp {
+	position: fixed;
+	bottom: 5px;
+	right: 5px;
+	z-index: 999;
+
+    a {
+        img {
+            width: 70px;
+
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+    }
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 768px) {
+	main {
+        h1 {
+            font-size: map-get($map-h1-h2-h3, tamanoFuenteMobile);
+        }
+        
+        h2 {
+            font-size: map-get($map-h1-h2-h3, tamanoFuenteMobile)*0.9;
+        }
+        
+        h3 {
+            font-size: map-get($map-h1-h2-h3, tamanoFuenteMobile)*0.8;
+        }
+    }
+}
