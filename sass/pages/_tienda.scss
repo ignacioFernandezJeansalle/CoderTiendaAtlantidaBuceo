@@ -1,0 +1,26 @@
+/*************************/
+/* _tienda.scss - Tienda */
+/*************************/
+.tienda__productos {
+	height: 100px;
+}
+
+.tienda__mediosDePago {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
+	li {
+		padding: 5px;
+	}
+
+	img {
+		display: block;
+		width: 70px;
+		border-radius: 5px;
+	}
+}
