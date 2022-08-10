@@ -1,27 +1,50 @@
-// VARIABLES GLOBALES
-let menu01 = "Máscaras";
-let menu02 = "Snorkels";
-let menu03 = "Aletas";
-let producto0101 = "Máscara ID01";
-let precio0101 = 1230;
-let producto0102 = "Máscara ID02";
-let precio0102 = 1290;
-let producto0103 = "Máscara ID03";
-let precio0103 = 2150;
+class Producto {
+	constructor(id, nombre, descripcion, clasificacion, precio, stock) {
+		this.id = id;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.clasificacion = clasificacion;
+		this.precio = parseFloat(precio);
+		this.stock = parseInt(stock);
+	}
+	disponible() {
+		if (this.stock > 0) {
+			return this.stock;
+		} else {
+			return 0;
+		}
+	}
+}
 
-let producto0201 = "Snorkel ID01";
-let precio0201 = 2345;
-let producto0202 = "Snorkel ID02";
-let precio0202 = 2598;
-let producto0203 = "Snorkel ID03";
-let precio0203 = 3252;
-
-let producto0301 = "Aleta ID01";
-let precio0301 = 2299;
-let producto0302 = "Aleta ID02";
-let precio0302 = 2399;
-let producto0303 = "Aleta ID03";
-let precio0303 = 2480;
+const clasificacionProductos = ["---", "Máscaras", "Snorkels", "Aletas", "Chalecos", "Reguladores", "Instrumentos", "Computadoras", "Neoprene", "Accesorios"];
+const productos = [];
+productos.push(new Producto(1001, "Máscara id1001", "Máscara de buceo id1001", "Máscaras", 2001, 101));
+productos.push(new Producto(1002, "Máscara id1002", "Máscara de buceo id1002", "Máscaras", 2002, 102));
+productos.push(new Producto(1003, "Máscara id1003", "Máscara de buceo id1003", "Máscaras", 2003, 103));
+productos.push(new Producto(2001, "Snorkel id2001", "Snorkel de buceo id2001", "Snorkels", 3001, 201));
+productos.push(new Producto(2002, "Snorkel id2002", "Snorkel de buceo id2002", "Snorkels", 3002, 202));
+productos.push(new Producto(2003, "Snorkel id2003", "Snorkel de buceo id2003", "Snorkels", 3003, 203));
+productos.push(new Producto(3001, "Aleta id3001", "Aleta de buceo id3001", "Aletas", 4001, 301));
+productos.push(new Producto(3002, "Aleta id3002", "Aleta de buceo id3002", "Aletas", 4002, 302));
+productos.push(new Producto(3003, "Aleta id3003", "Aleta de buceo id3003", "Aletas", 4003, 303));
+productos.push(new Producto(4001, "Chaleco id4001", "Chaleco de buceo id4001", "Chalecos", 5001, 401));
+productos.push(new Producto(4002, "Chaleco id4002", "Chaleco de buceo id4002", "Chalecos", 5002, 402));
+productos.push(new Producto(4003, "Chaleco id4003", "Chaleco de buceo id4003", "Chalecos", 5003, 403));
+productos.push(new Producto(5001, "Regulador id5001", "Regulador de buceo id5001", "Reguladores", 6001, 501));
+productos.push(new Producto(5002, "Regulador id5002", "Regulador de buceo id5002", "Reguladores", 6002, 502));
+productos.push(new Producto(5003, "Regulador id5003", "Regulador de buceo id5003", "Reguladores", 6003, 503));
+productos.push(new Producto(6001, "Instrumento id6001", "Instrumento de buceo id6001", "Instrumentos", 7001, 101));
+productos.push(new Producto(6002, "Instrumento id6002", "Instrumento de buceo id6002", "Instrumentos", 7002, 102));
+productos.push(new Producto(6003, "Instrumento id6003", "Instrumento de buceo id6003", "Instrumentos", 7003, 103));
+productos.push(new Producto(7001, "Computadora id7001", "Computadora de buceo id7001", "Computadoras", 8001, 201));
+productos.push(new Producto(7002, "Computadora id7002", "Computadora de buceo id7002", "Computadoras", 8002, 202));
+productos.push(new Producto(7003, "Computadora id7003", "Computadora de buceo id7003", "Computadoras", 8003, 203));
+productos.push(new Producto(8001, "Neoprene id8001", "Neoprene de buceo id8001", "Neoprene", 9001, 301));
+productos.push(new Producto(8002, "Neoprene id8002", "Neoprene de buceo id8002", "Neoprene", 9002, 302));
+productos.push(new Producto(8003, "Neoprene id8003", "Neoprene de buceo id8003", "Neoprene", 9003, 303));
+productos.push(new Producto(9001, "Accesorio id9001", "Accesorio de buceo id9001", "Accesorios", 9901, 401));
+productos.push(new Producto(9002, "Accesorio id9002", "Accesorio de buceo id9002", "Accesorios", 9902, 402));
+productos.push(new Producto(9003, "Accesorio id9003", "Accesorio de buceo id9003", "Accesorios", 9903, 403));
 
 let usuarioNombre = "";
 
@@ -38,115 +61,73 @@ function iniciarSesion() {
 
 function mostrarMenu() {
 	let entrada = 0;
+	let texto = "Por favor seleccione la opción deseada:";
 
-	while (!entrada || entrada < 1 || entrada > 3) {
-		entrada = parseInt(prompt("Por favor seleccione la opción deseada:\n1   " + menu01 + "\n2   " + menu02 + "\n3   " + menu03));
+	for (let i = 1; i < clasificacionProductos.length; i++) {
+		texto = texto + "\n" + i + "   " + clasificacionProductos[i];
 	}
 
-	return entrada;
+	while (!entrada || entrada < 1 || entrada >= clasificacionProductos.length) {
+		entrada = parseInt(prompt(texto));
+	}
+
+	return clasificacionProductos[entrada];
 }
 
-function mostrarSubmenu(n) {
+function mostrarSubmenu(xClasificacion) {
 	let entrada = 0;
+	let texto = "Por favor seleccione el ID de la opción deseada:";
+	let noEncontrado = true;
 
-	switch (n) {
-		case 1:
-			while (!entrada || entrada < 1 || entrada > 3) {
-				entrada = parseInt(prompt("Por favor seleccione la opción deseada:\n1   " + producto0101 + "   $" + precio0101 + "\n2   " + producto0102 + "   $" + precio0102 + "\n3   " + producto0103 + "   $" + precio0103));
-			}
-			break;
-		case 2:
-			while (!entrada || entrada < 1 || entrada > 3) {
-				entrada = parseInt(prompt("Por favor seleccione la opción deseada:\n1   " + producto0201 + "   $" + precio0201 + "\n2   " + producto0202 + "   $" + precio0202 + "\n3   " + producto0203 + "   $" + precio0203));
-			}
-			break;
-		case 3:
-			while (!entrada || entrada < 1 || entrada > 3) {
-				entrada = parseInt(prompt("Por favor seleccione la opción deseada:\n1   " + producto0301 + "   $" + precio0301 + "\n2   " + producto0302 + "   $" + precio0302 + "\n3   " + producto0303 + "   $" + precio0303));
-			}
-			break;
+	for (let i = 0; i < productos.length; i++) {
+		if (productos[i].clasificacion === xClasificacion) {
+			texto = texto + "\nID:" + productos[i].id + "   " + productos[i].nombre + "   $" + productos[i].precio;
+		}
 	}
+
+	while (!entrada || entrada < 1 || noEncontrado) {
+		entrada = parseInt(prompt(texto));
+		for (let i = 0; i < productos.length; i++) {
+			if (productos[i].id === entrada) {
+				noEncontrado = false;
+			}
+		}
+	}
+
 	return entrada;
 }
 
-function confirmarCompra(n, m) {
-	let producto = "";
-	let precio = "";
+function confirmarCompra(xidSeleccionado) {
 	let confirmacion = -1;
+	let i = 0;
 
-	switch (n) {
-		case 1:
-			switch (m) {
-				case 1:
-					producto = producto0101;
-					precio = precio0101;
-					break;
-				case 2:
-					producto = producto0102;
-					precio = precio0102;
-					break;
-				case 3:
-					producto = producto0103;
-					precio = precio0103;
-					break;
-			}
+	for (i = 0; i < productos.length; i++) {
+		if (productos[i].id === xidSeleccionado) {
 			break;
-		case 2:
-			switch (m) {
-				case 1:
-					producto = producto0201;
-					precio = precio0201;
-					break;
-				case 2:
-					producto = producto0202;
-					precio = precio0202;
-					break;
-				case 3:
-					producto = producto0203;
-					precio = precio0203;
-					break;
-			}
-			break;
-		case 3:
-			switch (m) {
-				case 1:
-					producto = producto0301;
-					precio = precio0301;
-					break;
-				case 2:
-					producto = producto0302;
-					precio = precio0302;
-					break;
-				case 3:
-					producto = producto0303;
-					precio = precio0303;
-					break;
-			}
-			break;
+		}
 	}
 
 	while (confirmacion !== 0 && confirmacion != 1) {
-		confirmacion = parseInt(prompt("Por favor confirma tu compra de:\n" + producto + "   $" + precio + "\n0   SALIR\n1   CONFIRMAR"));
-		console.log(confirmacion);
+		confirmacion = parseInt(prompt("Por favor confirma tu compra de:\n" + productos[i].nombre + "   $" + productos[i].precio + "\n0   SALIR\n1   CONFIRMAR"));
 	}
 	if (confirmacion === 0) {
 		alert("Muchas gracias por visitar nuestra tienda " + usuarioNombre);
 		console.log("No se concretó la venta");
 	} else {
-		alert("Muchas gracias por tu compra " + usuarioNombre + "\nCompraste: " + producto + " por $" + precio);
+		alert("Muchas gracias por tu compra " + usuarioNombre + "\nCompraste: " + productos[i].nombre + " por $" + productos[i].precio);
 		console.log("Se concretó la venta");
 	}
 }
 
 // MAIN
-
 iniciarSesion();
 
 let menuSeleccionado = mostrarMenu();
 console.log("Menú seleccionado: " + menuSeleccionado);
 
-let productoSeleccionado = mostrarSubmenu(menuSeleccionado);
-console.log("Producto seleccionado: " + productoSeleccionado);
+let idSeleccionado = mostrarSubmenu(menuSeleccionado);
+console.log("Producto seleccionado: " + idSeleccionado);
 
-confirmarCompra(menuSeleccionado, productoSeleccionado);
+confirmarCompra(idSeleccionado);
+
 //FIN
