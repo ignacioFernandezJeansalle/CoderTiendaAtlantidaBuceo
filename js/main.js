@@ -79,18 +79,15 @@ function mostrarSubmenu(xClasificacion) {
 	let texto = "Por favor seleccione el ID de la opción deseada:";
 	let noEncontrado = true;
 
-	for (let i = 0; i < productos.length; i++) {
-		if (productos[i].clasificacion === xClasificacion) {
-			texto = texto + "\nID:" + productos[i].id + "   " + productos[i].nombre + "   $" + productos[i].precio;
-		}
+	const filtradosClasificacion = productos.filter((item) => item.clasificacion === xClasificacion);
+	for (let i = 0; i < filtradosClasificacion.length; i++) {
+		texto = texto + "\nID:" + filtradosClasificacion[i].id + "   " + filtradosClasificacion[i].nombre + "   $" + filtradosClasificacion[i].precio;
 	}
 
 	while (!entrada || entrada < 1 || noEncontrado) {
 		entrada = parseInt(prompt(texto));
-		for (let i = 0; i < productos.length; i++) {
-			if (productos[i].id === entrada) {
-				noEncontrado = false;
-			}
+		if (productos.some((item) => item.id === entrada)) {
+			noEncontrado = false;
 		}
 	}
 
@@ -101,20 +98,17 @@ function confirmarCompra(xidSeleccionado) {
 	let confirmacion = -1;
 	let i = 0;
 
-	for (i = 0; i < productos.length; i++) {
-		if (productos[i].id === xidSeleccionado) {
-			break;
-		}
-	}
+	const filtradoId = productos.filter((item) => item.id === xidSeleccionado);
 
 	while (confirmacion !== 0 && confirmacion != 1) {
-		confirmacion = parseInt(prompt("Por favor confirma tu compra de:\n" + productos[i].nombre + "   $" + productos[i].precio + "\n0   SALIR\n1   CONFIRMAR"));
+		confirmacion = parseInt(prompt("Por favor confirma tu compra de:\n" + filtradoId[0].nombre + "   $" + filtradoId[0].precio + "\n0   SALIR\n1   CONFIRMAR"));
 	}
+
 	if (confirmacion === 0) {
 		alert("Muchas gracias por visitar nuestra tienda " + usuarioNombre);
 		console.log("No se concretó la venta");
 	} else {
-		alert("Muchas gracias por tu compra " + usuarioNombre + "\nCompraste: " + productos[i].nombre + " por $" + productos[i].precio);
+		alert("Muchas gracias por tu compra " + usuarioNombre + "\nCompraste: " + filtradoId[0].nombre + " por $" + filtradoId[0].precio);
 		console.log("Se concretó la venta");
 	}
 }
