@@ -105,10 +105,12 @@ function confirmarCompra(xidSeleccionado) {
 	}
 
 	if (confirmacion === 0) {
-		alert("Muchas gracias por visitar nuestra tienda " + usuarioNombre);
+		//alert("Muchas gracias por visitar nuestra tienda " + usuarioNombre);
+		document.getElementById("tienda__checkout").innerHTML = `<h4>Muchas gracias por visitar nuestra tienda ${usuarioNombre}!!!</h4>`;
 		console.log("No se concretó la venta");
 	} else {
-		alert("Muchas gracias por tu compra " + usuarioNombre + "\nCompraste: " + filtradoId[0].nombre + " por $" + filtradoId[0].precio);
+		//alert("Muchas gracias por tu compra " + usuarioNombre + "\nCompraste: " + filtradoId[0].nombre + " por $" + filtradoId[0].precio);
+		document.getElementById("tienda__checkout").innerHTML = `<h4>Muchas gracias por tu compra ${usuarioNombre}!!!<br /><br />Compraste: <b>${filtradoId[0].nombre} por $${filtradoId[0].precio}</b></h4>`;
 		console.log("Se concretó la venta");
 	}
 }
@@ -123,5 +125,4 @@ let idSeleccionado = mostrarSubmenu(menuSeleccionado);
 console.log("Producto seleccionado: " + idSeleccionado);
 
 confirmarCompra(idSeleccionado);
-
 //FIN

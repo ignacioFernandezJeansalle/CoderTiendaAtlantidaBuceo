@@ -165,7 +165,7 @@ main h3 {
 /***************************/
 .btnMasInfo {
   background-color: #DC0054;
-  color: #FFFFFF;
+  color: #ffffff;
   text-decoration: none;
   padding: 10px 20px;
   border-radius: 10px;
@@ -176,9 +176,27 @@ main h3 {
   margin-left: 10px;
 }
 .btnMasInfo:hover {
-  color: #FFFFFF;
+  color: #ffffff;
   letter-spacing: 0.1rem;
   box-shadow: 0 4px 8px 0 rgba(220, 0, 84, 0.7);
+}
+
+.btnComprar {
+  background-color: #006878;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  transition: letter-spacing 0.5s, box-shadow 0.5s;
+}
+.btnComprar i {
+  display: inline-block;
+  margin-left: 10px;
+}
+.btnComprar:hover {
+  color: #ffffff;
+  letter-spacing: 0.1rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 104, 120, 0.7);
 }
 
 /*********************/
@@ -482,8 +500,30 @@ main h3 {
 /*************************/
 /* _tienda.scss - Tienda */
 /*************************/
-.tienda__productos {
-  height: 100px;
+.tienda__card {
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+.tienda__card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.tienda__cardDatos {
+  padding: 2px 16px;
+  border-top: 2px solid #DC0054;
+  margin-bottom: 25px;
+}
+.tienda__cardDatos h3 {
+  text-align: left;
+}
+
+#tienda__checkout {
+  margin: 50px 50px;
+  background-color: #DC0054;
+  color: #ffffff;
+  padding: 20px;
+  text-align: center;
 }
 
 .tienda__mediosDePago {

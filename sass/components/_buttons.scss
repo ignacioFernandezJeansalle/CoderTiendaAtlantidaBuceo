@@ -4,23 +4,40 @@
 
 .btnMasInfo {
 	background-color: $colorATLRojo;
-	color: #FFFFFF;
+	color: #ffffff;
 	text-decoration: none;
 	padding: 10px 20px;
 	border-radius: 10px;
 	transition: letter-spacing 0.5s, box-shadow 0.5s;
-    
-    i {
-        display: inline-block;
-        margin-left: 10px;
-    }
-    
-    &:hover {
-        color: #FFFFFF;
-        letter-spacing: 0.1rem;
-        box-shadow: 0 4px 8px 0 rgba(220,0,84,0.7);
-    }    
+
+	i {
+		display: inline-block;
+		margin-left: 10px;
+	}
+
+	&:hover {
+		color: #ffffff;
+		letter-spacing: 0.1rem;
+		box-shadow: 0 4px 8px 0 rgba(220, 0, 84, 0.7);
+	}
 }
 
+.btnComprar {
+	background-color: $colorATLVerde;
+	color: #ffffff;
+	text-decoration: none;
+	padding: 10px 20px;
+	border-radius: 10px;
+	transition: letter-spacing 0.5s, box-shadow 0.5s;
 
+	i {
+		display: inline-block;
+		margin-left: 10px;
+	}
 
+	&:hover {
+		color: #ffffff;
+		letter-spacing: 0.1rem;
+		box-shadow: 0 4px 8px 0 rgba(0, 104, 120, 0.7);
+	}
+}
