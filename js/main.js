@@ -1,9 +1,17 @@
+// **************** //
+//		OBJETOS		//
+// **************** //
+
 class Producto {
-	constructor(id, nombre, descripcion, clasificacion, precio, stock) {
+	constructor(id, marca, modelo, clasifA, clasifB, clasifC, imgFile, alt, precio, stock) {
 		this.id = id;
-		this.nombre = nombre;
-		this.descripcion = descripcion;
-		this.clasificacion = clasificacion;
+		this.marca = marca;
+		this.modelo = modelo;
+		this.clasifA = clasifA;
+		this.clasifB = clasifB;
+		this.clasifC = clasifC;
+		this.imgFile = imgFile;
+		this.alt = alt;
 		this.precio = parseFloat(precio);
 		this.stock = parseInt(stock);
 	}
@@ -16,40 +24,80 @@ class Producto {
 	}
 }
 
-const clasificacionProductos = ["---", "Máscaras", "Snorkels", "Aletas", "Chalecos", "Reguladores", "Instrumentos", "Computadoras", "Neoprene", "Accesorios"];
-const productos = [];
-productos.push(new Producto(1001, "Máscara id1001", "Máscara de buceo id1001", "Máscaras", 2001, 101));
-productos.push(new Producto(1002, "Máscara id1002", "Máscara de buceo id1002", "Máscaras", 2002, 102));
-productos.push(new Producto(1003, "Máscara id1003", "Máscara de buceo id1003", "Máscaras", 2003, 103));
-productos.push(new Producto(2001, "Snorkel id2001", "Snorkel de buceo id2001", "Snorkels", 3001, 201));
-productos.push(new Producto(2002, "Snorkel id2002", "Snorkel de buceo id2002", "Snorkels", 3002, 202));
-productos.push(new Producto(2003, "Snorkel id2003", "Snorkel de buceo id2003", "Snorkels", 3003, 203));
-productos.push(new Producto(3001, "Aleta id3001", "Aleta de buceo id3001", "Aletas", 4001, 301));
-productos.push(new Producto(3002, "Aleta id3002", "Aleta de buceo id3002", "Aletas", 4002, 302));
-productos.push(new Producto(3003, "Aleta id3003", "Aleta de buceo id3003", "Aletas", 4003, 303));
-productos.push(new Producto(4001, "Chaleco id4001", "Chaleco de buceo id4001", "Chalecos", 5001, 401));
-productos.push(new Producto(4002, "Chaleco id4002", "Chaleco de buceo id4002", "Chalecos", 5002, 402));
-productos.push(new Producto(4003, "Chaleco id4003", "Chaleco de buceo id4003", "Chalecos", 5003, 403));
-productos.push(new Producto(5001, "Regulador id5001", "Regulador de buceo id5001", "Reguladores", 6001, 501));
-productos.push(new Producto(5002, "Regulador id5002", "Regulador de buceo id5002", "Reguladores", 6002, 502));
-productos.push(new Producto(5003, "Regulador id5003", "Regulador de buceo id5003", "Reguladores", 6003, 503));
-productos.push(new Producto(6001, "Instrumento id6001", "Instrumento de buceo id6001", "Instrumentos", 7001, 101));
-productos.push(new Producto(6002, "Instrumento id6002", "Instrumento de buceo id6002", "Instrumentos", 7002, 102));
-productos.push(new Producto(6003, "Instrumento id6003", "Instrumento de buceo id6003", "Instrumentos", 7003, 103));
-productos.push(new Producto(7001, "Computadora id7001", "Computadora de buceo id7001", "Computadoras", 8001, 201));
-productos.push(new Producto(7002, "Computadora id7002", "Computadora de buceo id7002", "Computadoras", 8002, 202));
-productos.push(new Producto(7003, "Computadora id7003", "Computadora de buceo id7003", "Computadoras", 8003, 203));
-productos.push(new Producto(8001, "Neoprene id8001", "Neoprene de buceo id8001", "Neoprene", 9001, 301));
-productos.push(new Producto(8002, "Neoprene id8002", "Neoprene de buceo id8002", "Neoprene", 9002, 302));
-productos.push(new Producto(8003, "Neoprene id8003", "Neoprene de buceo id8003", "Neoprene", 9003, 303));
-productos.push(new Producto(9001, "Accesorio id9001", "Accesorio de buceo id9001", "Accesorios", 9901, 401));
-productos.push(new Producto(9002, "Accesorio id9002", "Accesorio de buceo id9002", "Accesorios", 9902, 402));
-productos.push(new Producto(9003, "Accesorio id9003", "Accesorio de buceo id9003", "Accesorios", 9903, 403));
+// **************** //
+//		EVENTOS		//
+// **************** //
+onmouseup = (event) => {
+	let obj1 = document.getElementById("tienda__btnProductos");
+	let obj2 = document.getElementById("tienda__filtros");
+	if (!obj1.contains(event.target) && !obj2.contains(event.target)) {
+		ocultarFiltros();
+	}
+};
 
-let usuarioNombre = "";
+const btnProductos = document.getElementById("tienda__btnProductos");
+btnProductos.onclick = () => {
+	toggleFiltros();
+};
 
-// FUNCIONES
-function iniciarSesion() {
+const menuFiltros = document.getElementById("tienda__filtros");
+
+const checkAletas = document.getElementById("tienda__filtros--checkAletas");
+checkAletas.onclick = () => {
+	filtrarProductos();
+};
+
+const checkChalecos = document.getElementById("tienda__filtros--checkChalecos");
+checkChalecos.onclick = () => {
+	filtrarProductos();
+};
+
+const checkComputadoras = document.getElementById("tienda__filtros--checkComputadoras");
+checkComputadoras.onclick = () => {
+	filtrarProductos();
+};
+
+const checkMascaras = document.getElementById("tienda__filtros--checkMascaras");
+checkMascaras.onclick = () => {
+	filtrarProductos();
+};
+
+const checkNeoprene = document.getElementById("tienda__filtros--checkNeoprene");
+checkNeoprene.onclick = () => {
+	filtrarProductos();
+};
+
+const checkReguladores = document.getElementById("tienda__filtros--checkReguladores");
+checkReguladores.onclick = () => {
+	filtrarProductos();
+};
+
+const checkSnorkels = document.getElementById("tienda__filtros--checkSnorkels");
+checkSnorkels.onclick = () => {
+	filtrarProductos();
+};
+
+const btnVerTodos = document.getElementById("tienda__filtros--btnVerTodos");
+btnVerTodos.onclick = () => {
+	checkAletas.checked = false;
+	checkChalecos.checked = false;
+	checkComputadoras.checked = false;
+	checkMascaras.checked = false;
+	checkNeoprene.checked = false;
+	checkReguladores.checked = false;
+	checkSnorkels.checked = false;
+	filtrarProductos();
+};
+
+const selOrdenarPor = document.getElementById("tienda__selOrdenarPor");
+selOrdenarPor.onchange = () => {
+	filtrarProductos();
+};
+
+// ******************** //
+//		FUNCIONES		//
+// ******************** //
+/* function iniciarSesion() {
 	usuarioNombre = prompt("Bienvenido a la tienda de productos de BUCEO de Atlantida!!\n\nPor favor ingrese su nombre de usuario:");
 
 	while (!usuarioNombre) {
@@ -113,9 +161,240 @@ function confirmarCompra(xidSeleccionado) {
 		document.getElementById("tienda__checkout").innerHTML = `<h4>Muchas gracias por tu compra ${usuarioNombre}!!!<br /><br />Compraste: <b>${filtradoId[0].nombre} por $${filtradoId[0].precio}</b></h4>`;
 		console.log("Se concretó la venta");
 	}
+} */
+
+function toggleFiltros() {
+	if (!menuFiltros.className.includes("d-none")) {
+		ocultarFiltros();
+	} else {
+		mostrarFiltros();
+	}
+}
+function ocultarFiltros() {
+	menuFiltros.classList.add("d-none");
+	document.getElementById("tienda__btnProductos--icono").classList.remove("bi-caret-up-fill");
+	document.getElementById("tienda__btnProductos--icono").classList.add("bi-caret-down-fill");
+}
+function mostrarFiltros() {
+	menuFiltros.classList.remove("d-none");
+	document.getElementById("tienda__btnProductos--icono").classList.remove("bi-caret-down-fill");
+	document.getElementById("tienda__btnProductos--icono").classList.add("bi-caret-up-fill");
+}
+function filtrarProductos() {
+	if (!checkAletas.checked && !checkChalecos.checked && !checkComputadoras.checked && !checkMascaras.checked && !checkNeoprene.checked && !checkReguladores.checked && !checkSnorkels.checked) {
+		mostrarProductos(productos, selOrdenarPor.value);
+	} else {
+		productosFiltrados = productos.filter(
+			(x) =>
+				(checkAletas.checked && x.clasifA === clasificacionProductos.aletas) ||
+				(checkChalecos.checked && x.clasifA === clasificacionProductos.chalecos) ||
+				(checkComputadoras.checked && x.clasifA === clasificacionProductos.computadoras) ||
+				(checkMascaras.checked && x.clasifA === clasificacionProductos.mascaras) ||
+				(checkNeoprene.checked && x.clasifA === clasificacionProductos.neoprene) ||
+				(checkReguladores.checked && x.clasifA === clasificacionProductos.reguladores) ||
+				(checkSnorkels.checked && x.clasifA === clasificacionProductos.snorkels)
+		);
+		mostrarProductos(productosFiltrados, selOrdenarPor.value);
+	}
+}
+function mostrarProductos(fProductos, fOrden) {
+	switch (fOrden) {
+		case "ordenAZ":
+			fProductos.sort((itemA, itemB) => {
+				if (itemA.marca + itemA.modelo > itemB.marca + itemB.modelo) {
+					return 1;
+				}
+				if (itemA.marca + itemA.modelo < itemB.marca + itemB.modelo) {
+					return -1;
+				}
+				// a es igual a b
+				return 0;
+			});
+			break;
+		case "ordenZA":
+			fProductos.sort((itemA, itemB) => {
+				if (itemA.marca + itemA.modelo > itemB.marca + itemB.modelo) {
+					return -1;
+				}
+				if (itemA.marca + itemA.modelo < itemB.marca + itemB.modelo) {
+					return 1;
+				}
+				// a es igual a b
+				return 0;
+			});
+			break;
+		case "precioMeMa":
+			fProductos.sort((itemA, itemB) => {
+				if (itemA.precio > itemB.precio) {
+					return 1;
+				}
+				if (itemA.precio < itemB.precio) {
+					return -1;
+				}
+				// a es igual a b
+				return 0;
+			});
+			break;
+		case "precioMaMe":
+			fProductos.sort((itemA, itemB) => {
+				if (itemA.precio > itemB.precio) {
+					return -1;
+				}
+				if (itemA.precio < itemB.precio) {
+					return 1;
+				}
+				// a es igual a b
+				return 0;
+			});
+			break;
+	}
+
+	let container = "";
+	for (let i = 0; i < fProductos.length; i++) {
+		container += `
+		<div class="col-12 col-md-4 col-xl-3 p-4 d-flex justify-content-center align-items-stretch">
+			<div class="tienda__card">
+				<img src="../images/productos/${fProductos[i].imgFile}" alt="${fProductos[i].alt}" width="100%" />
+				<div class="tienda__cardDatos">
+					<h3 class="mt-3">${fProductos[i].marca} / ${fProductos[i].modelo}</h3>
+					<p class="mb-3">
+						<b>$${fProductos[i].precio}.-</b><br />Disponibles: ${fProductos[i].disponible()} u.
+					</p>
+					<a class="btnComprar" href="#">Agregar<i class="bi bi-cart"></i></a>
+				</div>
+			</div>
+		</div>
+		`;
+	}
+	document.getElementById("tienda__resultados").innerHTML = `Resultados: ${fProductos.length}`;
+	document.getElementById("tienda__productos").innerHTML = container;
 }
 
-// MAIN
+// **************** //
+//		MAIN		//
+// **************** //
+
+const clasificacionProductos = {
+	aletas: 1,
+	chalecos: 2,
+	computadoras: 3,
+	mascaras: 4,
+	neoprene: 5,
+	reguladores: 6,
+	snorkels: 7,
+};
+
+let productos = [];
+let productosFiltrados = [];
+
+productos.push(new Producto(1001, "Aqualung", "Amika", clasificacionProductos.aletas, "", "", "1001.jpg", "Aleta de buceo", 10207, 3));
+productos.push(new Producto(1002, "Aqualung", "Phazer", clasificacionProductos.aletas, "", "", "1002.jpg", "Aleta de buceo", 34590, 2));
+productos.push(new Producto(1003, "Aqualung", "Stratos ADJ", clasificacionProductos.aletas, "", "", "1003.jpg", "Aleta de buceo", 21349, 4));
+productos.push(new Producto(1004, "Cressi", "Frog", clasificacionProductos.aletas, "", "", "1004.png", "Aleta de buceo", 29626, 9));
+productos.push(new Producto(1005, "Cressi", "Frog Plus", clasificacionProductos.aletas, "", "", "1005.png", "Aleta de buceo", 29626, 9));
+productos.push(new Producto(1006, "Cressi", "Pluma", clasificacionProductos.aletas, "", "", "1006.jpg", "Aleta de buceo", 13412, 3));
+productos.push(new Producto(1007, "Cressi", "Pro Light", clasificacionProductos.aletas, "", "", "1007.jpg", "Aleta de buceo", 19500, 4));
+productos.push(new Producto(1008, "Cressi", "Reaction EBS", clasificacionProductos.aletas, "", "", "1008.jpg", "Aleta de buceo", 34900, 1));
+productos.push(new Producto(1009, "Cressi", "Thor EBS", clasificacionProductos.aletas, "", "", "1009.jpg", "Aleta de buceo", 41400, 7));
+productos.push(new Producto(1010, "Pino", "Antenal", clasificacionProductos.aletas, "", "", "1010.jpg", "Aleta de buceo", 17600, 1));
+productos.push(new Producto(1011, "Scubapro", "Jet Sport", clasificacionProductos.aletas, "", "", "1011.jpg", "Aleta de buceo", 18900, 3));
+productos.push(new Producto(1012, "Aqualung", "Axiom", clasificacionProductos.chalecos, "", "", "1012.png", "Chaleco de buceo", 124996, 7));
+productos.push(new Producto(1013, "Aqualung", "Omni", clasificacionProductos.chalecos, "", "", "1013.png", "Chaleco de buceo", 158246, 1));
+productos.push(new Producto(1014, "Aqualung", "Soul I3", clasificacionProductos.chalecos, "", "", "1014.jpg", "Chaleco de buceo", 147951, 7));
+productos.push(new Producto(1015, "Aqualung", "Wave", clasificacionProductos.chalecos, "", "", "1015.jpg", "Chaleco de buceo", 69900, 4));
+productos.push(new Producto(1016, "Scubapro", "Equator", clasificacionProductos.chalecos, "", "", "1016.jpg", "Chaleco de buceo", 131731, 2));
+productos.push(new Producto(1017, "Scubapro", "Glide", clasificacionProductos.chalecos, "", "", "1017.jpg", "Chaleco de buceo", 155000, 5));
+productos.push(new Producto(1018, "Scubapro", "Go", clasificacionProductos.chalecos, "", "", "1018.jpg", "Chaleco de buceo", 133399, 6));
+productos.push(new Producto(1019, "Scubapro", "Hydros Pro", clasificacionProductos.chalecos, "", "", "1019.jpg", "Chaleco de buceo", 208031, 3));
+productos.push(new Producto(1020, "Scubapro", "Knighthawk", clasificacionProductos.chalecos, "", "", "1020.jpg", "Chaleco de buceo", 172707, 7));
+productos.push(new Producto(1021, "Scubapro", "Level", clasificacionProductos.chalecos, "", "", "1021.png", "Chaleco de buceo", 124900, 6));
+productos.push(new Producto(1022, "Scubapro", "Litehawk", clasificacionProductos.chalecos, "", "", "1022.jpg", "Chaleco de buceo", 106615, 10));
+productos.push(new Producto(1023, "Aqualung", "I100", clasificacionProductos.computadoras, "", "", "1023.png", "Computadora de buceo", 49900, 10));
+productos.push(new Producto(1024, "Cressi", "Goa", clasificacionProductos.computadoras, "", "", "1024.jpg", "Computadora de buceo", 119004, 2));
+productos.push(new Producto(1025, "Scubapro", "Aladin Sport Matrix", clasificacionProductos.computadoras, "", "", "1025.jpg", "Computadora de buceo", 110988, 8));
+productos.push(new Producto(1026, "Scubapro", "Z1 Solar", clasificacionProductos.computadoras, "", "", "1026.png", "Computadora de buceo", 170182, 5));
+productos.push(new Producto(1027, "Aqualung", "Look", clasificacionProductos.mascaras, "", "", "1027.jpg", "Máscara de buceo", 7900, 2));
+productos.push(new Producto(1028, "Aqualung", "Reveal X1", clasificacionProductos.mascaras, "", "", "1028.jpg", "Máscara de buceo", 9500, 8));
+productos.push(new Producto(1029, "Aqualung", "Reveal X2", clasificacionProductos.mascaras, "", "", "1029.jpg", "Máscara de buceo", 9500, 2));
+productos.push(new Producto(1030, "Cressi", "Action", clasificacionProductos.mascaras, "", "", "1030.jpg", "Máscara de buceo", 13076, 5));
+productos.push(new Producto(1031, "Cressi", "Air", clasificacionProductos.mascaras, "", "", "1031.jpg", "Máscara de buceo", 19750, 8));
+productos.push(new Producto(1032, "Cressi", "Calibro", clasificacionProductos.mascaras, "", "", "1032.jpg", "Máscara de buceo", 22500, 2));
+productos.push(new Producto(1033, "Cressi", "Matrix", clasificacionProductos.mascaras, "", "", "1033.jpg", "Máscara de buceo", 15500, 8));
+productos.push(new Producto(1034, "Cressi", "Nano Crystal", clasificacionProductos.mascaras, "", "", "1034.jpg", "Máscara de buceo", 21900, 8));
+productos.push(new Producto(1035, "Cressi", "Zeuz", clasificacionProductos.mascaras, "", "", "1035.jpg", "Máscara de buceo", 24500, 5));
+productos.push(new Producto(1036, "Scubapro", "Sinergy 2 Twin", clasificacionProductos.mascaras, "", "", "1036.png", "Máscara de buceo", 8900, 9));
+productos.push(new Producto(1037, "Scubapro", "Sirenetta", clasificacionProductos.mascaras, "", "", "1037.jpg", "Máscara de buceo", 8111, 4));
+productos.push(new Producto(1038, "Aqualung", "Dive 5.5mm", clasificacionProductos.neoprene, "Traje húmedo", "Mujer", "1038.jpg", "Traje húmedo de buceo", 61528, 4));
+productos.push(new Producto(1039, "Aqualung", "Hudson 7mm", clasificacionProductos.neoprene, "Traje húmedo", "", "1039.png", "traje húmedo de buceo", 115695, 7));
+productos.push(new Producto(1040, "Aqualung", "Polynesian 3mm", clasificacionProductos.neoprene, "Botas", "", "1040.jpg", "Botas de buceo", 11900, 3));
+productos.push(new Producto(1041, "Aqualung", "Superzip Ergo 5mm", clasificacionProductos.neoprene, "Botas", "", "1041.jpg", "Botas de buceo", 18500, 1));
+productos.push(new Producto(1042, "Aquon", "Chaleco Smooth 3mm", clasificacionProductos.neoprene, "Chaleco", "", "1042.jpg", "Chaleco de buceo", 17900, 1));
+productos.push(new Producto(1043, "Pino", "Bota Islander", clasificacionProductos.neoprene, "Botas", "", "1043.jpg", "Botas de buceo", 17500, 7));
+productos.push(new Producto(1044, "Pino", "Casco buceo 5mm", clasificacionProductos.neoprene, "Casco", "", "1044.jpg", "Casco de buceo", 6289, 3));
+productos.push(new Producto(1045, "Pino", "Casco Nervi 6mm", clasificacionProductos.neoprene, "Casco", "", "1045.jpg", "Casco de buceo", 8822, 1));
+productos.push(new Producto(1046, "Pino", "Casco Pro Dive 6.5mm", clasificacionProductos.neoprene, "Casco", "", "1046.jpg", "Casco de buceo", 9350, 9));
+productos.push(new Producto(1047, "Pino", "Casco Supreme 6mm", clasificacionProductos.neoprene, "Casco", "", "1047.jpg", "Casco de buceo", 8525, 5));
+productos.push(new Producto(1048, "Pino", "Conjunto Albacora 7mm", clasificacionProductos.neoprene, "Traje húmedo", "Mujer", "1048.jpg", "Traje húmedo de buceo", 73259, 10));
+productos.push(new Producto(1049, "Pino", "Conjunto Narwhal 5mm", clasificacionProductos.neoprene, "Traje húmedo", "", "1049.jpg", "Traje húmedo de buceo", 82592, 3));
+productos.push(new Producto(1050, "Pino", "Conjunto Narwhal 5mm", clasificacionProductos.neoprene, "Traje húmedo", "Mujer", "1050.jpg", "Traje húmedo de buceo", 82592, 6));
+productos.push(new Producto(1051, "Pino", "Conjunto Narwhal 7mm", clasificacionProductos.neoprene, "Traje húmedo", "", "1051.jpg", "Traje húmedo de buceo", 99143, 10));
+productos.push(new Producto(1052, "Pino", "Conjunto New Supreme 7mm", clasificacionProductos.neoprene, "Traje húmedo", "Hombre", "1052.jpg", "Traje húmedo de buceo", 90161, 3));
+productos.push(new Producto(1053, "Pino", "Guante Amara", clasificacionProductos.neoprene, "Guantes", "", "1053.jpg", "Guantes de buceo", 7600, 5));
+productos.push(new Producto(1054, "Pino", "Guante buceo 3mm", clasificacionProductos.neoprene, "Guantes", "", "1054.jpg", "Guantes de buceo", 7400, 5));
+productos.push(new Producto(1055, "Pino", "Media anatómica 2mm", clasificacionProductos.neoprene, "Medias", "", "1055.jpg", "Medias de buceo", 6900, 5));
+productos.push(new Producto(1056, "Pino", "Media caza submarina 5mm", clasificacionProductos.neoprene, "Medias", "", "1056.jpg", "Medias de buceo", 13842, 10));
+productos.push(new Producto(1057, "Pino", "Neolycra Mesh UV manga larga", clasificacionProductos.neoprene, "Lycra", "Mujer", "1057.jpg", "Lycra de buceo", 13900, 2));
+productos.push(new Producto(1058, "Pino", "Neolycra Mesh UV manga larga", clasificacionProductos.neoprene, "Lycra", "Hombre", "1058.jpg", "Lycra de buceo", 13900, 1));
+productos.push(new Producto(1059, "Pino", "Neolycra UV manga larga", clasificacionProductos.neoprene, "Lycra", "", "1059.jpg", "Lycra de buceo", 13900, 3));
+productos.push(new Producto(1060, "Pino", "Patagonic 7mm", clasificacionProductos.neoprene, "Traje semi seco", "", "1060.jpg", "Traje semi seco de buceo", 132279, 9));
+productos.push(new Producto(1061, "Pino", "Raia 5mm", clasificacionProductos.neoprene, "Traje húmedo", "Hombre", "1061.jpg", "Traje húmedo de buceo", 66040, 7));
+productos.push(new Producto(1062, "Pino", "Raia 7mm", clasificacionProductos.neoprene, "Traje húmedo", "Hombre", "1062.jpg", "Traje húmedo de buceo", 71005, 6));
+productos.push(new Producto(1063, "Pino", "Raia 5mm", clasificacionProductos.neoprene, "Traje húmedo", "Mujer", "1063.jpg", "Traje húmedo de buceo", 66040, 3));
+productos.push(new Producto(1064, "Pino", "Raia 7mm", clasificacionProductos.neoprene, "Traje húmedo", "Mujer", "1064.jpg", "Traje húmedo de buceo", 71005, 4));
+productos.push(new Producto(1065, "Pino", "Pro Yamamoto Seco 7mm", clasificacionProductos.neoprene, "Traje seco", "", "1065.jpg", "Traje seco de buceo", 316958, 10));
+productos.push(new Producto(1066, "Pino", "Seco 7mm", clasificacionProductos.neoprene, "Traje seco", "", "1066.png", "Traje seco de buceo", 270616, 10));
+productos.push(new Producto(1067, "Pino", "Zapatilla náutica", clasificacionProductos.neoprene, "Botas", "", "1067.jpg", "Botas de buceo", 13737, 2));
+productos.push(new Producto(1068, "Aqualung", "Calypso classic", clasificacionProductos.reguladores, "Principal", "", "1068.jpg", "Regulador de buceo", 49900, 1));
+productos.push(new Producto(1069, "Aqualung", "Calypso octopus", clasificacionProductos.reguladores, "Octopus", "", "1069.jpg", "Regulador octopus de buceo", 27315, 2));
+productos.push(new Producto(1070, "Aqualung", "Consola", clasificacionProductos.reguladores, "Instrumentos", "", "1070.png", "Consola de buceo", 43861, 7));
+productos.push(new Producto(1071, "Aqualung", "Legend ACD Yoke", clasificacionProductos.reguladores, "Principal", "", "1071.png", "Regulador de buceo", 171434, 9));
+productos.push(new Producto(1072, "Aqualung", "Legend Lux ACD Yoke", clasificacionProductos.reguladores, "Principal", "", "1072.png", "Regulador de buceo", 233837, 8));
+productos.push(new Producto(1073, "Aqualung", "Legend MBS ACD", clasificacionProductos.reguladores, "Principal", "", "1073.png", "Regulador de buceo", 175000, 3));
+productos.push(new Producto(1074, "Aqualung", "Legend octopus", clasificacionProductos.reguladores, "Octopus", "", "1074.png", "Regulador octopus de buceo", 54477, 6));
+productos.push(new Producto(1075, "Aqualung", "Manómetro", clasificacionProductos.reguladores, "Instrumentos", "", "1075.png", "Manómetro de buceo", 28550, 3));
+productos.push(new Producto(1076, "Aqualung", "Mikron", clasificacionProductos.reguladores, "Principal", "", "1076.jpg", "Regulador de buceo", 125478, 1));
+productos.push(new Producto(1077, "Cressi", "XS Compact octopus", clasificacionProductos.reguladores, "Octopus", "", "1077.png", "Regulador octopus de buceo", 37899, 4));
+productos.push(new Producto(1078, "Cressi", "XS Compact-MC9 Yoke", clasificacionProductos.reguladores, "Principal", "", "1078.png", "Regulador de buceo", 105762, 1));
+productos.push(new Producto(1079, "Cressi", "XS2 octopus", clasificacionProductos.reguladores, "Octopus", "", "1079.png", "Regulador octopus de buceo", 36230, 2));
+productos.push(new Producto(1080, "Cressi", "XS2-AC2 Yoke", clasificacionProductos.reguladores, "Principal", "", "1080.png", "Regulador de buceo", 75972, 8));
+productos.push(new Producto(1081, "Scubapro", "Consola 2G U Line", clasificacionProductos.reguladores, "Instrumentos", "", "1081.jpg", "Consola de buceo", 45900, 8));
+productos.push(new Producto(1082, "Scubapro", "Manómetro U Line", clasificacionProductos.reguladores, "Instrumentos", "", "1082.jpg", "Manómetro de buceo", 27315, 6));
+productos.push(new Producto(1083, "Scubapro", "MK2 Evo", clasificacionProductos.reguladores, "Principal", "", "1083.jpg", "Regulador de buceo", 72500, 3));
+productos.push(new Producto(1084, "Scubapro", "MK11-C370", clasificacionProductos.reguladores, "Principal", "", "1084.jpg", "Regulador de buceo", 125605, 2));
+productos.push(new Producto(1085, "Scubapro", "MK25 Evo DIN", clasificacionProductos.reguladores, "Principal", "", "1085.jpg", "Regulador de buceo", 231730, 4));
+productos.push(new Producto(1086, "Scubapro", "MK25 Evo Yoke", clasificacionProductos.reguladores, "Principal", "", "1086.png", "Regulador de buceo", 231730, 5));
+productos.push(new Producto(1087, "Aqualung", "Air Dry PV", clasificacionProductos.snorkels, "", "", "1087.jpg", "Snorkel de buceo", 4191, 4));
+productos.push(new Producto(1088, "Aqualung", "Aquilon", clasificacionProductos.snorkels, "", "", "1088.jpg", "Snorkel de buceo", 3822, 10));
+productos.push(new Producto(1089, "Aqualung", "Aquilon PV", clasificacionProductos.snorkels, "", "", "1089.png", "Snorkel de buceo", 7237, 9));
+productos.push(new Producto(1090, "Aqualung", "Pike", clasificacionProductos.snorkels, "", "", "1090.jpg", "Snorkel de buceo", 3690, 9));
+productos.push(new Producto(1091, "Aqualung", "Zephyr", clasificacionProductos.snorkels, "", "", "1091.jpg", "Snorkel de buceo", 3900, 5));
+productos.push(new Producto(1092, "Aqualung", "Zephyr Flex", clasificacionProductos.snorkels, "", "", "1092.png", "Snorkel de buceo", 4900, 2));
+productos.push(new Producto(1093, "Cressi", "Alpha Ultra Dry", clasificacionProductos.snorkels, "", "", "1093.jpg", "Snorkel de buceo", 12911, 10));
+productos.push(new Producto(1094, "Cressi", "Corsica", clasificacionProductos.snorkels, "", "", "1094.png", "Snorkel de buceo", 5932, 2));
+productos.push(new Producto(1095, "Cressi", "Desert Dry", clasificacionProductos.snorkels, "", "", "1095.png", "Snorkel de buceo", 9587, 9));
+productos.push(new Producto(1096, "Cressi", "Gamma", clasificacionProductos.snorkels, "", "", "1096.jpg", "Snorkel de buceo", 5500, 10));
+productos.push(new Producto(1097, "Cressi", "México", clasificacionProductos.snorkels, "", "", "1097.jpg", "Snorkel de buceo", 3500, 7));
+productos.push(new Producto(1098, "Cressi", "Tao", clasificacionProductos.snorkels, "", "", "1098.png", "Snorkel de buceo", 7125, 6));
+productos.push(new Producto(1099, "Cressi", "Top Kids", clasificacionProductos.snorkels, "", "", "1099.jpg", "Snorkel de buceo", 4055, 6));
+productos.push(new Producto(1100, "Pino", "Antenal", clasificacionProductos.snorkels, "", "", "1100.jpg", "Snorkel de buceo", 2500, 5));
+productos.push(new Producto(1101, "Scubapro", "Apena", clasificacionProductos.snorkels, "", "", "1101.png", "Snorkel de buceo", 5200, 9));
+productos.push(new Producto(1102, "Scubapro", "Escape", clasificacionProductos.snorkels, "", "", "1102.jpg", "Snorkel de buceo", 4952, 9));
+productos.push(new Producto(1103, "Scubapro", "Pufferfish Kid", clasificacionProductos.snorkels, "", "", "1103.png", "Snorkel de buceo", 2551, 4));
+productos.push(new Producto(1104, "Scubapro", "Trinidad", clasificacionProductos.snorkels, "", "", "1104.jpg", "Snorkel de buceo", 5193, 9));
+
+mostrarProductos(productos, selOrdenarPor.value);
+
+/* let usuarioNombre = "";
 iniciarSesion();
 
 let menuSeleccionado = mostrarMenu();
@@ -124,5 +403,4 @@ console.log("Menú seleccionado: " + menuSeleccionado);
 let idSeleccionado = mostrarSubmenu(menuSeleccionado);
 console.log("Producto seleccionado: " + idSeleccionado);
 
-confirmarCompra(idSeleccionado);
-//FIN
+confirmarCompra(idSeleccionado); */

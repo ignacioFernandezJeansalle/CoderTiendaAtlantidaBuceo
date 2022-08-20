@@ -89,6 +89,8 @@ main h3 {
 }
 
 .nav-link {
+  background-color: #006878;
+  border: none;
   color: #ffffff;
 }
 .nav-link:hover {
@@ -500,6 +502,62 @@ main h3 {
 /*************************/
 /* _tienda.scss - Tienda */
 /*************************/
+#tienda__filtros {
+  padding-top: 1rem;
+  background-color: #F2F2F2;
+  box-shadow: 0 4px 8px 0 rgba(0, 104, 120, 0.7);
+  width: 175px;
+}
+#tienda__filtros ul {
+  list-style: none;
+}
+#tienda__filtros ul li {
+  padding: 5px;
+}
+#tienda__filtros ul li input[type=checkbox] {
+  display: none;
+}
+#tienda__filtros ul li input[type=checkbox] + label:before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  float: left;
+  margin-right: 7px;
+  border: 2px solid #006878;
+  background: #fff;
+}
+#tienda__filtros ul li input[type=checkbox]:checked + label:after {
+  content: "";
+  width: 14px;
+  height: 6px;
+  border: 2px solid #006878;
+  float: left;
+  margin-left: -24px;
+  border-right: 0;
+  border-top: 0;
+  margin-top: 5px;
+  transform: rotate(-55deg);
+}
+#tienda__filtros ul li button {
+  border: none;
+  color: #DC0054;
+}
+#tienda__filtros ul li button i {
+  font-size: 18px;
+  margin-right: 4px;
+}
+
+.tienda__formOrdenarPor {
+  margin-left: auto;
+  margin-right: 10px;
+  max-width: 250px;
+}
+.tienda__formOrdenarPor label,
+.tienda__formOrdenarPor p {
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
 .tienda__card {
   background-color: #ffffff;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
