@@ -251,6 +251,12 @@ function mostrarProductos(fProductos, fOrden) {
 
 	let container = "";
 	for (let i = 0; i < fProductos.length; i++) {
+		let auxDisponibilidad = "";
+		if (fProductos[i].disponible() > 0) {
+			auxDisponibilidad = `<a class="btnComprar" href="#">Agregar<i class="bi bi-cart"></i></a>`;
+		} else {
+			auxDisponibilidad = `<p class="mb-3 fst-italic text-decoration-underline">Sin stock</p>`;
+		}
 		container += `
 		<div class="col-12 col-md-4 col-xl-3 p-4 d-flex justify-content-center align-items-stretch">
 			<div class="tienda__card">
@@ -260,7 +266,7 @@ function mostrarProductos(fProductos, fOrden) {
 					<p class="mb-3">
 						<b>$${fProductos[i].precio}.-</b><br />Disponibles: ${fProductos[i].disponible()} u.
 					</p>
-					<a class="btnComprar" href="#">Agregar<i class="bi bi-cart"></i></a>
+					${auxDisponibilidad}
 				</div>
 			</div>
 		</div>
