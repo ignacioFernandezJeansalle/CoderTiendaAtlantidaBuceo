@@ -87,6 +87,11 @@ main h3 {
 .navbar__estilos {
   background-color: #006878;
 }
+.navbar__estilos--tienda {
+  background-color: #006878;
+  position: sticky;
+  top: 66px;
+}
 
 .nav-link {
   background-color: #006878;
@@ -186,9 +191,9 @@ main h3 {
 .btnComprar {
   background-color: #006878;
   color: #ffffff;
-  text-decoration: none;
   padding: 10px 20px;
   border-radius: 10px;
+  border: none;
   transition: letter-spacing 0.5s, box-shadow 0.5s;
 }
 .btnComprar i {
@@ -199,6 +204,18 @@ main h3 {
   color: #ffffff;
   letter-spacing: 0.1rem;
   box-shadow: 0 4px 8px 0 rgba(0, 104, 120, 0.7);
+}
+
+.btnEliminar {
+  color: #DC0054;
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: none;
+  margin-right: 10px;
+}
+.btnEliminar:hover {
+  background-color: #DC0054;
+  color: #ffffff;
 }
 
 /*********************/
@@ -502,22 +519,34 @@ main h3 {
 /*************************/
 /* _tienda.scss - Tienda */
 /*************************/
-#tienda__filtros {
-  padding-top: 1rem;
-  background-color: #F2F2F2;
-  box-shadow: 0 4px 8px 0 rgba(0, 104, 120, 0.7);
-  width: 175px;
+#tienda__btnCarrito--contador {
+  background-color: #DC0054;
+  display: inline-block;
+  /* min-width: 1.5rem; */
+  margin-left: 5px;
+  border-radius: 30%;
+  padding: 0 5px;
 }
-#tienda__filtros ul {
+
+.tienda__filtros,
+#tienda__containerCheckout {
+  padding-top: 1rem;
+}
+.tienda__filtros ul,
+#tienda__containerCheckout ul {
   list-style: none;
 }
-#tienda__filtros ul li {
+.tienda__filtros ul li,
+#tienda__containerCheckout ul li {
   padding: 5px;
+  min-width: 145px;
 }
-#tienda__filtros ul li input[type=checkbox] {
+.tienda__filtros ul li input[type=checkbox],
+#tienda__containerCheckout ul li input[type=checkbox] {
   display: none;
 }
-#tienda__filtros ul li input[type=checkbox] + label:before {
+.tienda__filtros ul li input[type=checkbox] + label:before,
+#tienda__containerCheckout ul li input[type=checkbox] + label:before {
   content: "";
   width: 20px;
   height: 20px;
@@ -526,7 +555,8 @@ main h3 {
   border: 2px solid #006878;
   background: #fff;
 }
-#tienda__filtros ul li input[type=checkbox]:checked + label:after {
+.tienda__filtros ul li input[type=checkbox]:checked + label:after,
+#tienda__containerCheckout ul li input[type=checkbox]:checked + label:after {
   content: "";
   width: 14px;
   height: 6px;
@@ -538,33 +568,36 @@ main h3 {
   margin-top: 5px;
   transform: rotate(-55deg);
 }
-#tienda__filtros ul li button {
-  border: none;
-  color: #DC0054;
-}
-#tienda__filtros ul li button i {
-  font-size: 18px;
-  margin-right: 4px;
-}
 
 .tienda__formOrdenarPor {
-  margin-left: auto;
-  margin-right: 10px;
+  padding-left: 1rem;
+}
+.tienda__formOrdenarPor .form-select {
   max-width: 250px;
 }
-.tienda__formOrdenarPor label,
+.tienda__formOrdenarPor .form-select:focus {
+  box-shadow: 0 0 0 0.25rem rgba(0, 104, 120, 0.25);
+}
+.tienda__formOrdenarPor label {
+  margin-bottom: 5px;
+}
 .tienda__formOrdenarPor p {
   margin-top: 5px;
-  margin-left: 5px;
 }
 
+/* RESPONSIVE */
+@media screen and (max-width: 768px) {
+  .form-select {
+    font-size: 0.8rem;
+  }
+}
 .tienda__card {
   background-color: #ffffff;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 104, 120, 0.25);
   transition: 0.3s;
 }
 .tienda__card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px 0 rgba(0, 104, 120, 0.25);
 }
 
 .tienda__cardDatos {
@@ -576,12 +609,26 @@ main h3 {
   text-align: left;
 }
 
-#tienda__checkout {
-  margin: 50px 50px;
-  background-color: #DC0054;
-  color: #ffffff;
-  padding: 20px;
-  text-align: center;
+#tienda__containerCarrito hr,
+#tienda__containerCheckout hr,
+#tienda__containerCheckoutConfirma hr {
+  color: #DC0054;
+}
+
+.tienda__productoCarrito {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.tienda__productoCarrito img {
+  border: 1px solid #006878;
+  display: block;
+  max-width: 40px;
+}
+
+#tienda__containerCheckout .form-control:focus,
+#tienda__containerCheckout .form-select:focus {
+  box-shadow: 0 0 0 0.25rem rgba(0, 104, 120, 0.25);
 }
 
 .tienda__mediosDePago {
@@ -614,11 +661,11 @@ main h3 {
 }
 
 .staff__card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 104, 120, 0.25);
   transition: 0.3s;
 }
 .staff__card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px 0 rgba(0, 104, 120, 0.25);
 }
 
 .staff__cardDatos {

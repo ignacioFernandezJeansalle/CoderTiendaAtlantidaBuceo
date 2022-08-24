@@ -25,9 +25,9 @@
 .btnComprar {
 	background-color: $colorATLVerde;
 	color: #ffffff;
-	text-decoration: none;
 	padding: 10px 20px;
 	border-radius: 10px;
+	border: none;
 	transition: letter-spacing 0.5s, box-shadow 0.5s;
 
 	i {
@@ -39,5 +39,18 @@
 		color: #ffffff;
 		letter-spacing: 0.1rem;
 		box-shadow: 0 4px 8px 0 rgba(0, 104, 120, 0.7);
+	}
+}
+
+.btnEliminar {
+	color: $colorATLRojo;
+	padding: 5px 10px;
+	border-radius: 10px;
+	border: none;
+	margin-right: 10px;
+
+	&:hover {
+		background-color: $colorATLRojo;
+		color: #ffffff;
 	}
 }

@@ -7,6 +7,12 @@
 /* ------------------ */
 .navbar__estilos {
 	background-color: $colorATLVerde;
+
+	&--tienda {
+		background-color: $colorATLVerde;
+		position: sticky;
+		top: 66px;
+	}
 }
 
 .nav-link {

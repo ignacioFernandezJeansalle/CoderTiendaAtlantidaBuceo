@@ -1,7 +1,6 @@
 // **************** //
 //		OBJETOS		//
 // **************** //
-
 class Producto {
 	constructor(id, marca, modelo, clasifA, clasifB, clasifC, imgFile, alt, precio, stock) {
 		this.id = id;
@@ -27,58 +26,90 @@ class Producto {
 // **************** //
 //		EVENTOS		//
 // **************** //
-onmouseup = (event) => {
-	let obj1 = document.getElementById("tienda__btnProductos");
-	let obj2 = document.getElementById("tienda__filtros");
-	if (!obj1.contains(event.target) && !obj2.contains(event.target)) {
-		ocultarFiltros();
-	}
-};
+const containerProductos = document.getElementById("tienda_containerProductos");
+const containerMiCuenta = document.getElementById("tienda__containerMiCuenta");
+const containerCarrito = document.getElementById("tienda__containerCarrito");
+const containerCheckout = document.getElementById("tienda__containerCheckout");
 
 const btnProductos = document.getElementById("tienda__btnProductos");
 btnProductos.onclick = () => {
-	toggleFiltros();
+	containerProductos.classList.remove("d-none");
+	containerMiCuenta.classList.add("d-none");
+	containerCarrito.classList.add("d-none");
+	containerCheckout.classList.add("d-none");
+	document.documentElement.scrollTop = 0;
 };
 
-const menuFiltros = document.getElementById("tienda__filtros");
+const btnMiCuenta = document.getElementById("tienda__btnMiCuenta");
+btnMiCuenta.onclick = () => {
+	containerProductos.classList.add("d-none");
+	containerMiCuenta.classList.remove("d-none");
+	containerCarrito.classList.add("d-none");
+	containerCheckout.classList.add("d-none");
+	document.documentElement.scrollTop = 0;
+};
+
+const btnCarrito = document.getElementById("tienda__btnCarrito");
+btnCarrito.onclick = () => {
+	containerProductos.classList.add("d-none");
+	containerMiCuenta.classList.add("d-none");
+	containerCarrito.classList.remove("d-none");
+	containerCheckout.classList.add("d-none");
+	document.documentElement.scrollTop = 0;
+};
+
+function btnCheckout() {
+	containerProductos.classList.add("d-none");
+	containerMiCuenta.classList.add("d-none");
+	containerCarrito.classList.add("d-none");
+	containerCheckout.classList.remove("d-none");
+	document.documentElement.scrollTop = 0;
+}
 
 const checkAletas = document.getElementById("tienda__filtros--checkAletas");
 checkAletas.onclick = () => {
+	checkVerTodos.checked = false;
 	filtrarProductos();
 };
 
 const checkChalecos = document.getElementById("tienda__filtros--checkChalecos");
 checkChalecos.onclick = () => {
+	checkVerTodos.checked = false;
 	filtrarProductos();
 };
 
 const checkComputadoras = document.getElementById("tienda__filtros--checkComputadoras");
 checkComputadoras.onclick = () => {
+	checkVerTodos.checked = false;
 	filtrarProductos();
 };
 
 const checkMascaras = document.getElementById("tienda__filtros--checkMascaras");
 checkMascaras.onclick = () => {
+	checkVerTodos.checked = false;
 	filtrarProductos();
 };
 
 const checkNeoprene = document.getElementById("tienda__filtros--checkNeoprene");
 checkNeoprene.onclick = () => {
+	checkVerTodos.checked = false;
 	filtrarProductos();
 };
 
 const checkReguladores = document.getElementById("tienda__filtros--checkReguladores");
 checkReguladores.onclick = () => {
+	checkVerTodos.checked = false;
 	filtrarProductos();
 };
 
 const checkSnorkels = document.getElementById("tienda__filtros--checkSnorkels");
 checkSnorkels.onclick = () => {
+	checkVerTodos.checked = false;
 	filtrarProductos();
 };
 
-const btnVerTodos = document.getElementById("tienda__filtros--btnVerTodos");
-btnVerTodos.onclick = () => {
+const checkVerTodos = document.getElementById("tienda__filtros--checkVerTodos");
+checkVerTodos.onclick = () => {
 	checkAletas.checked = false;
 	checkChalecos.checked = false;
 	checkComputadoras.checked = false;
@@ -94,95 +125,35 @@ selOrdenarPor.onchange = () => {
 	filtrarProductos();
 };
 
+const checkRetiro = document.getElementById("tienda__formCheckRetiro");
+checkRetiro.onclick = () => {
+	document.getElementById("containerRetiro").classList.remove("d-none");
+	document.getElementById("containerEnvio").classList.add("d-none");
+	checkEnvio.checked = false;
+	checkRetiro.disabled = true;
+	checkEnvio.disabled = false;
+};
+
+const checkEnvio = document.getElementById("tienda__formCheckEnvio");
+checkEnvio.onclick = () => {
+	document.getElementById("containerRetiro").classList.add("d-none");
+	document.getElementById("containerEnvio").classList.remove("d-none");
+	checkRetiro.checked = false;
+	checkRetiro.disabled = false;
+	checkEnvio.disabled = true;
+};
+
+function btnCheckoutConfirma() {
+	alert("Gracias por comprar!!!\n\nHasta acá llegué!!!");
+}
+
 // ******************** //
 //		FUNCIONES		//
 // ******************** //
-/* function iniciarSesion() {
-	usuarioNombre = prompt("Bienvenido a la tienda de productos de BUCEO de Atlantida!!\n\nPor favor ingrese su nombre de usuario:");
-
-	while (!usuarioNombre) {
-		usuarioNombre = prompt("\nPor favor ingrese un nombre de usuario válida:");
-	}
-
-	console.log("Nombre de usuario: " + usuarioNombre);
-}
-
-function mostrarMenu() {
-	let entrada = 0;
-	let texto = "Por favor seleccione la opción deseada:";
-
-	for (let i = 1; i < clasificacionProductos.length; i++) {
-		texto = texto + "\n" + i + "   " + clasificacionProductos[i];
-	}
-
-	while (!entrada || entrada < 1 || entrada >= clasificacionProductos.length) {
-		entrada = parseInt(prompt(texto));
-	}
-
-	return clasificacionProductos[entrada];
-}
-
-function mostrarSubmenu(xClasificacion) {
-	let entrada = 0;
-	let texto = "Por favor seleccione el ID de la opción deseada:";
-	let noEncontrado = true;
-
-	const filtradosClasificacion = productos.filter((item) => item.clasificacion === xClasificacion);
-	for (let i = 0; i < filtradosClasificacion.length; i++) {
-		texto = texto + "\nID:" + filtradosClasificacion[i].id + "   " + filtradosClasificacion[i].nombre + "   $" + filtradosClasificacion[i].precio;
-	}
-
-	while (!entrada || entrada < 1 || noEncontrado) {
-		entrada = parseInt(prompt(texto));
-		if (productos.some((item) => item.id === entrada)) {
-			noEncontrado = false;
-		}
-	}
-
-	return entrada;
-}
-
-function confirmarCompra(xidSeleccionado) {
-	let confirmacion = -1;
-	let i = 0;
-
-	const filtradoId = productos.filter((item) => item.id === xidSeleccionado);
-
-	while (confirmacion !== 0 && confirmacion != 1) {
-		confirmacion = parseInt(prompt("Por favor confirma tu compra de:\n" + filtradoId[0].nombre + "   $" + filtradoId[0].precio + "\n0   SALIR\n1   CONFIRMAR"));
-	}
-
-	if (confirmacion === 0) {
-		//alert("Muchas gracias por visitar nuestra tienda " + usuarioNombre);
-		document.getElementById("tienda__checkout").innerHTML = `<h4>Muchas gracias por visitar nuestra tienda ${usuarioNombre}!!!</h4>`;
-		console.log("No se concretó la venta");
-	} else {
-		//alert("Muchas gracias por tu compra " + usuarioNombre + "\nCompraste: " + filtradoId[0].nombre + " por $" + filtradoId[0].precio);
-		document.getElementById("tienda__checkout").innerHTML = `<h4>Muchas gracias por tu compra ${usuarioNombre}!!!<br /><br />Compraste: <b>${filtradoId[0].nombre} por $${filtradoId[0].precio}</b></h4>`;
-		console.log("Se concretó la venta");
-	}
-} */
-
-function toggleFiltros() {
-	if (!menuFiltros.className.includes("d-none")) {
-		ocultarFiltros();
-	} else {
-		mostrarFiltros();
-	}
-}
-function ocultarFiltros() {
-	menuFiltros.classList.add("d-none");
-	document.getElementById("tienda__btnProductos--icono").classList.remove("bi-caret-up-fill");
-	document.getElementById("tienda__btnProductos--icono").classList.add("bi-caret-down-fill");
-}
-function mostrarFiltros() {
-	menuFiltros.classList.remove("d-none");
-	document.getElementById("tienda__btnProductos--icono").classList.remove("bi-caret-down-fill");
-	document.getElementById("tienda__btnProductos--icono").classList.add("bi-caret-up-fill");
-}
 function filtrarProductos() {
 	if (!checkAletas.checked && !checkChalecos.checked && !checkComputadoras.checked && !checkMascaras.checked && !checkNeoprene.checked && !checkReguladores.checked && !checkSnorkels.checked) {
-		mostrarProductos(productos, selOrdenarPor.value);
+		checkVerTodos.checked = true;
+		renderProductos(productos, selOrdenarPor.value);
 	} else {
 		productosFiltrados = productos.filter(
 			(x) =>
@@ -194,10 +165,10 @@ function filtrarProductos() {
 				(checkReguladores.checked && x.clasifA === clasificacionProductos.reguladores) ||
 				(checkSnorkels.checked && x.clasifA === clasificacionProductos.snorkels)
 		);
-		mostrarProductos(productosFiltrados, selOrdenarPor.value);
+		renderProductos(productosFiltrados, selOrdenarPor.value);
 	}
 }
-function mostrarProductos(fProductos, fOrden) {
+function renderProductos(fProductos, fOrden) {
 	switch (fOrden) {
 		case "ordenAZ":
 			fProductos.sort((itemA, itemB) => {
@@ -253,12 +224,12 @@ function mostrarProductos(fProductos, fOrden) {
 	for (let i = 0; i < fProductos.length; i++) {
 		let auxDisponibilidad = "";
 		if (fProductos[i].disponible() > 0) {
-			auxDisponibilidad = `<a class="btnComprar" href="#">Agregar<i class="bi bi-cart"></i></a>`;
+			auxDisponibilidad = `<button onclick="agregarAlCarrito(${fProductos[i].id})" class="btnComprar">Agregar<i class="bi bi-cart"></i></button>`;
 		} else {
 			auxDisponibilidad = `<p class="mb-3 fst-italic text-decoration-underline">Sin stock</p>`;
 		}
 		container += `
-		<div class="col-12 col-md-4 col-xl-3 p-4 d-flex justify-content-center align-items-stretch">
+		<div class="col-10 col-sm-6 col-md-4 col-xl-3 p-4 d-flex align-items-stretch">
 			<div class="tienda__card">
 				<img src="../images/productos/${fProductos[i].imgFile}" alt="${fProductos[i].alt}" width="100%" />
 				<div class="tienda__cardDatos">
@@ -275,11 +246,63 @@ function mostrarProductos(fProductos, fOrden) {
 	document.getElementById("tienda__resultados").innerHTML = `Resultados: ${fProductos.length}`;
 	document.getElementById("tienda__productos").innerHTML = container;
 }
+function agregarAlCarrito(fId) {
+	let item = productos.find((prod) => prod.id === fId);
+	carrito.push(item);
+	document.getElementById("tienda__btnCarrito--contador").innerHTML = `${carrito.length}`;
+	actualizarStock(fId, -1);
+	filtrarProductos();
+	renderCarrito();
+}
+function eliminarDelCarrito(fId, fI) {
+	carrito.splice(fI, 1);
+	document.getElementById("tienda__btnCarrito--contador").innerHTML = `${carrito.length}`;
+	actualizarStock(fId, 1);
+	filtrarProductos();
+	renderCarrito();
+}
+function actualizarStock(fId, fCantidad) {
+	for (let i = 0; i < productos.length; i++) {
+		if (productos[i].id === fId) {
+			productos[i].stock += fCantidad;
+		}
+	}
+}
+function renderCarrito() {
+	let container = "";
+	let total = 0;
+	if (carrito.length >= 1) {
+		for (let i = 0; i < carrito.length; i++) {
+			container += `
+			<div class="d-flex justify-content-between align-items-center mb-2">
+				<div class="tienda__productoCarrito">
+					<button onclick="eliminarDelCarrito(${carrito[i].id}, ${i})" class="btnEliminar"><i class="bi bi-x-circle"></i></button>	
+					<img src="../images/productos/${carrito[i].imgFile}" alt="${carrito[i].alt}">
+					<p class="ms-2 mb-0">${carrito[i].marca} / ${carrito[i].modelo}</p>
+				</div>
+				<p class="mb-0">$${carrito[i].precio}.-</p>
+			</div>
+			`;
+			total += carrito[i].precio;
+		}
+	} else {
+		container = "<p>El carrito de compras está vacío</p>";
+	}
+	container += `<hr /><p class="fs-5 text-end"><b>TOTAL: $${total}.-</br></p>`;
+	if (carrito.length >= 1) {
+		container += `
+		<div class="row">
+			<div class="col text-end">
+				<button onclick="btnCheckout()" class="btnComprar">Finalizar</button>
+			</div>
+		</div>`;
+	}
+	document.getElementById("tienda__containerCarrito--productos").innerHTML = container;
+}
 
 // **************** //
 //		MAIN		//
 // **************** //
-
 const clasificacionProductos = {
 	aletas: 1,
 	chalecos: 2,
@@ -290,10 +313,11 @@ const clasificacionProductos = {
 	snorkels: 7,
 };
 
-let productos = [];
+const productos = [];
 let productosFiltrados = [];
+let carrito = [];
 
-productos.push(new Producto(1001, "Aqualung", "Amika", clasificacionProductos.aletas, "", "", "1001.jpg", "Aleta de buceo", 10207, 3));
+productos.push(new Producto(1001, "Aqualung", "Amika", clasificacionProductos.aletas, "", "", "1001.jpg", "Aleta de buceo", 10207, 0));
 productos.push(new Producto(1002, "Aqualung", "Phazer", clasificacionProductos.aletas, "", "", "1002.jpg", "Aleta de buceo", 34590, 2));
 productos.push(new Producto(1003, "Aqualung", "Stratos ADJ", clasificacionProductos.aletas, "", "", "1003.jpg", "Aleta de buceo", 21349, 4));
 productos.push(new Producto(1004, "Cressi", "Frog", clasificacionProductos.aletas, "", "", "1004.png", "Aleta de buceo", 29626, 9));
@@ -398,15 +422,5 @@ productos.push(new Producto(1102, "Scubapro", "Escape", clasificacionProductos.s
 productos.push(new Producto(1103, "Scubapro", "Pufferfish Kid", clasificacionProductos.snorkels, "", "", "1103.png", "Snorkel de buceo", 2551, 4));
 productos.push(new Producto(1104, "Scubapro", "Trinidad", clasificacionProductos.snorkels, "", "", "1104.jpg", "Snorkel de buceo", 5193, 9));
 
-mostrarProductos(productos, selOrdenarPor.value);
-
-/* let usuarioNombre = "";
-iniciarSesion();
-
-let menuSeleccionado = mostrarMenu();
-console.log("Menú seleccionado: " + menuSeleccionado);
-
-let idSeleccionado = mostrarSubmenu(menuSeleccionado);
-console.log("Producto seleccionado: " + idSeleccionado);
-
-confirmarCompra(idSeleccionado); */
+renderProductos(productos, selOrdenarPor.value);
+renderCarrito();
