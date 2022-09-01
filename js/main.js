@@ -181,11 +181,11 @@ const renderProductos = (fProductos, fOrden) => {
 	let container = "";
 	for (let i = 0; i < fProductos.length; i++) {
 		let auxDisponibilidad = "";
-		if (fProductos[i].disponible() > 0) {
-			auxDisponibilidad = `<button onclick="agregarAlCarrito(${fProductos[i].id});" class="btnComprar">Agregar<i class="bi bi-cart"></i></button>`;
-		} else {
-			auxDisponibilidad = `<p class="mb-3 fst-italic text-decoration-underline">Sin stock</p>`;
-		}
+
+		fProductos[i].disponible() > 0
+			? (auxDisponibilidad = `<button onclick="agregarAlCarrito(${fProductos[i].id});" class="btnComprar">Agregar<i class="bi bi-cart"></i></button>`)
+			: (auxDisponibilidad = `<p class="mb-3 fst-italic text-decoration-underline">Sin stock</p>`);
+
 		container += `
 		<div class="col-10 col-sm-6 col-md-4 col-xl-3 p-4 d-flex align-items-stretch">
 			<div class="tienda__card">
@@ -206,7 +206,7 @@ const renderProductos = (fProductos, fOrden) => {
 };
 
 const agregarAlCarrito = (fId) => {
-	let item = productos.find((prod) => prod.id === fId);
+	const item = productos.find((prod) => prod.id === fId);
 	carrito.push(item);
 	actualizarStock(fId, -1);
 	filtrarProductos();
@@ -270,9 +270,7 @@ const setLocalStorage = () => {
 
 const getLocalStorage = () => {
 	const carritoJSONGet = JSON.parse(localStorage.getItem("carritoJSON"));
-	if (carritoJSONGet != null) {
-		carrito = carritoJSONGet;
-	}
+	carrito = [...carritoJSONGet] || [];
 };
 
 const renderContainerCheckoutConfirma = () => {
@@ -478,11 +476,7 @@ class Producto {
 		this.stock = parseInt(stock);
 	}
 	disponible() {
-		if (this.stock > 0) {
-			return this.stock;
-		} else {
-			return 0;
-		}
+		return this.stock > 0 ? this.stock : 0;
 	}
 }
 
@@ -498,7 +492,7 @@ const clasificacionProductos = {
 
 const productos = [];
 let productosFiltrados = [];
-let carrito = [];
+let carrito;
 
 getDBProductos();
 
