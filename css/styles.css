@@ -9,7 +9,7 @@
 }
 
 body {
-  background: #F2F2F2;
+  background: #f2f2f2;
   font-family: "Nunito", sans-serif;
   font-size: 16px;
 }
@@ -47,7 +47,7 @@ main h3 {
 }
 
 .tituloPagina hr {
-  color: #DC0054;
+  color: #dc0054;
 }
 
 /* -------- */
@@ -171,7 +171,7 @@ main h3 {
 /* _buttons.scss - Botones */
 /***************************/
 .btnMasInfo {
-  background-color: #DC0054;
+  background-color: #dc0054;
   color: #ffffff;
   text-decoration: none;
   padding: 10px 20px;
@@ -207,14 +207,14 @@ main h3 {
 }
 
 .btnEliminar {
-  color: #DC0054;
+  color: #dc0054;
   padding: 5px 10px;
   border-radius: 10px;
   border: none;
   margin-right: 10px;
 }
 .btnEliminar:hover {
-  background-color: #DC0054;
+  background-color: #dc0054;
   color: #ffffff;
 }
 
@@ -312,7 +312,7 @@ main h3 {
   border-radius: 10px;
 }
 .introCursosEspecialidades hr, .introNosotros hr {
-  color: #DC0054;
+  color: #dc0054;
 }
 
 /* ------------------ */
@@ -326,7 +326,7 @@ main h3 {
   border-radius: 10px;
 }
 .introViajes hr {
-  color: #DC0054;
+  color: #dc0054;
 }
 .introViajes img {
   width: 100%;
@@ -383,7 +383,7 @@ main h3 {
 }
 
 .cursos__flex--izq hr {
-  color: #DC0054;
+  color: #dc0054;
 }
 
 .cursos__flex--der {
@@ -435,7 +435,7 @@ main h3 {
 }
 
 .viajes__temp2021 h2, .viajes__temp2022 h2 {
-  background-color: #DC0054;
+  background-color: #dc0054;
   color: #FFFFFF;
   border-radius: 10px;
   width: 30%;
@@ -520,7 +520,7 @@ main h3 {
 /* _tienda.scss - Tienda */
 /*************************/
 #tienda__btnCarrito--contador {
-  background-color: #DC0054;
+  background-color: #dc0054;
   display: inline-block;
   /* min-width: 1.5rem; */
   margin-left: 5px;
@@ -602,7 +602,7 @@ main h3 {
 
 .tienda__cardDatos {
   padding: 2px 16px;
-  border-top: 2px solid #DC0054;
+  border-top: 2px solid #dc0054;
   margin-bottom: 25px;
 }
 .tienda__cardDatos h3 {
@@ -612,7 +612,7 @@ main h3 {
 #tienda__containerCarrito hr,
 #tienda__containerCheckout hr,
 #tienda__containerCheckoutConfirma hr {
-  color: #DC0054;
+  color: #dc0054;
 }
 
 .tienda__productoCarrito {
@@ -703,7 +703,7 @@ main h3 {
 }
 
 .ubicacion hr {
-  color: #DC0054;
+  color: #dc0054;
 }
 .ubicacion iframe {
   width: 100%;

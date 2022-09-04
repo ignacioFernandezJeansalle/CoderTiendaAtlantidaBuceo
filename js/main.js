@@ -211,6 +211,15 @@ const agregarAlCarrito = (fId) => {
 	actualizarStock(fId, -1);
 	filtrarProductos();
 	renderCarrito();
+
+	Toastify({
+		text: "El producto seleccionado se agregó a tu carrito",
+		duration: 3000,
+		offset: { y: 120 },
+		style: {
+			background: "linear-gradient(to right, #006878, #009878)",
+		},
+	}).showToast();
 };
 
 const eliminarDelCarrito = (fId, fI) => {
@@ -218,6 +227,15 @@ const eliminarDelCarrito = (fId, fI) => {
 	actualizarStock(fId, 1);
 	filtrarProductos();
 	renderCarrito();
+
+	Toastify({
+		text: "El producto seleccionado se eliminó de tu carrito",
+		duration: 3000,
+		offset: { y: 120 },
+		style: {
+			background: "linear-gradient(to right, #DC0054, #DC6054)",
+		},
+	}).showToast();
 };
 
 const actualizarStock = (fId, fCantidad) => {
@@ -230,7 +248,8 @@ const actualizarStock = (fId, fCantidad) => {
 
 const renderCarrito = () => {
 	let container = "";
-	let total = 0;
+	let total = getTotalCompra();
+
 	if (carrito.length >= 1) {
 		for (let i = 0; i < carrito.length; i++) {
 			container += `
@@ -241,9 +260,7 @@ const renderCarrito = () => {
 					<p class="ms-2 mb-0">${carrito[i].marca} / ${carrito[i].modelo}</p>
 				</div>
 				<p class="mb-0">$${carrito[i].precio}.-</p>
-			</div>
-			`;
-			total += carrito[i].precio;
+			</div>`;
 		}
 	} else {
 		container = "<p>El carrito de compras está vacío</p>";
@@ -263,6 +280,11 @@ const renderCarrito = () => {
 	setLocalStorage();
 };
 
+const getTotalCompra = () => {
+	let total = carrito.reduce((acumulador, item) => acumulador + item.precio, 0);
+	return total;
+};
+
 const setLocalStorage = () => {
 	const carritoJSON = JSON.stringify(carrito);
 	localStorage.setItem("carritoJSON", carritoJSON);
@@ -274,6 +296,7 @@ const getLocalStorage = () => {
 };
 
 const renderContainerCheckoutConfirma = () => {
+	let total = getTotalCompra();
 	let container = "";
 	container += `
 	<div class="row justify-content-center">
@@ -281,24 +304,50 @@ const renderContainerCheckoutConfirma = () => {
 			<h2 class="pt-4">TU COMPRA FUE CONFIRMADA!</h2>
 			<hr />
 			<p> 
-				Felicitaciones <b>${formNombre.value.toUpperCase()} ${formApellido.value.toUpperCase()}</b> por tu compra.<br />
-				Recibirás en tu correo <b>${formMail.value}</b> un resumen de la compra que acabás de realizar.
+				Felicitaciones <b>${usuario.nombre} ${usuario.apellido}</b> por tu compra.<br />
+				Recibirás en tu correo <b>${usuario.mail}</b> un resumen de la compra que acabás de realizar.
 			</p>
 			<hr />
 			<p>
 			`;
 
 	carrito.forEach((item) => {
-		container += `- ${item.marca} / ${item.modelo} - $${item.precio}.-<br />`;
+		container += `${item.marca} ${item.modelo} [$${item.precio}]<br />`;
 	});
+
+	container += `<b>Total: $${total}</b> (`;
+
+	switch (formTarjetaCuotas.value) {
+		case "TCx01":
+			container += `1 cuota sin interés de $${parseFloat(total).toFixed(2)})<br />`;
+			break;
+		case "TCx03":
+			container += `3 cuotas sin interés de $${parseFloat(total / 3).toFixed(2)})<br />`;
+			break;
+		case "TCx06":
+			container += `6 cuotas sin interés de $${parseFloat(total / 6).toFixed(2)})<br />`;
+			break;
+		case "TCx12":
+			container += `12 cuotas sin interés de $${parseFloat(total / 12).toFixed(2)})<br />`;
+			break;
+	}
 
 	container += `
 			</p>
 			<hr />
-			<p>
+			<p>`;
+
+	if (checkRetiro.checked) {
+		container += `
 				Recordá que podrás retirar tu compra a partir del próximo día hábil por:<br />
 				- Club José Hernández - Bragado 5950, Mataderos, C.A.B.A., Argentina.<br />
-				- Lunes a viernes de 9 a 18hs.<br />
+				- Lunes a viernes de 9 a 18hs.<br />`;
+	} else {
+		container += `
+				Dirección de envío: ${usuario.calle} ${usuario.numero} ${usuario.piso} ${usuario.depto} - ${usuario.ciudad} (${usuario.codigoPostal})<br />`;
+	}
+
+	container += `
 			</p>
 		</div>
 	</div>`;
@@ -306,7 +355,92 @@ const renderContainerCheckoutConfirma = () => {
 };
 
 const validarFormularioCheckout = () => {
-	return true;
+	let valido = true;
+
+	usuario.nombre = formNombre.value.toUpperCase() || "";
+	usuario.apellido = formApellido.value.toUpperCase() || "";
+	usuario.nroDocumento = formNroDocumento.value || 0;
+	usuario.mail = formMail.value.toLowerCase() || "";
+	if (checkEnvio.checked) {
+		usuario.calle = formCalle.value.toUpperCase() || "";
+		usuario.numero = formNumero.value || 0;
+		usuario.piso = formPiso.value.toUpperCase() || "";
+		usuario.depto = formDepto.value.toUpperCase() || "";
+		usuario.ciudad = formCiudad.value.toUpperCase() || "";
+		usuario.codigoPostal = formCodigoPostal.value || 0;
+	}
+	usuario.tarjetaNumero = formTarjetaNumero.value || 0;
+	usuario.tarjetaNombre = formTarjetaNombre.value.toUpperCase() || "";
+	usuario.tarjetaValidoMes = formTarjetaValidoMes.value || 0;
+	usuario.tarjetaValidoAnio = formTarjetaValidoAnio.value || 0;
+	usuario.tarjetaCodSeg = formTarjetaCodSeg.value || 0;
+
+	if (usuario.nombre == "") {
+		valido = false;
+		formNombre.focus();
+		msgValidacionToastify("Ingrese un nombre válido");
+	} else if (usuario.apellido == "") {
+		valido = false;
+		formApellido.focus();
+		msgValidacionToastify("Ingrese un apellido válido");
+	} else if (usuario.nroDocumento < 1000000 || usuario.nroDocumento > 99999999) {
+		valido = false;
+		formNroDocumento.focus();
+		msgValidacionToastify("Ingrese un documento válido");
+	} else if (!/^\w+([\.-_]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(usuario.mail)) {
+		valido = false;
+		formMail.focus();
+		msgValidacionToastify("Ingrese un correo electrónico válido");
+	} else if (checkEnvio.checked && usuario.calle == "") {
+		valido = false;
+		formCalle.focus();
+		msgValidacionToastify("Ingrese una calle válida");
+	} else if (checkEnvio.checked && (usuario.numero == 0 || usuario.numero > 99999)) {
+		valido = false;
+		formNumero.focus();
+		msgValidacionToastify("Ingrese un número válido");
+	} else if (checkEnvio.checked && usuario.ciudad == "") {
+		valido = false;
+		formCiudad.focus();
+		msgValidacionToastify("Ingrese una ciudad válida");
+	} else if (checkEnvio.checked && (usuario.codigoPostal < 1000 || usuario.codigoPostal > 9999)) {
+		valido = false;
+		formCodigoPostal.focus();
+		msgValidacionToastify("Ingrese un código postal válido");
+	} else if (usuario.tarjetaNumero < 1000000000000000 || usuario.tarjetaNumero > 9999999999999999n) {
+		valido = false;
+		formTarjetaNumero.focus();
+		msgValidacionToastify("Ingrese un número de tarjeta válido");
+	} else if (usuario.tarjetaNombre == "") {
+		valido = false;
+		formTarjetaNombre.focus();
+		msgValidacionToastify("Ingrese un nombre de tarjeta de crédito válido");
+	} else if (usuario.tarjetaValidoMes < 1 || usuario.tarjetaValidoMes > 12) {
+		valido = false;
+		formTarjetaValidoMes.focus();
+		msgValidacionToastify("Ingrese un mes válido (MM)");
+	} else if (usuario.tarjetaValidoAnio < 22 || usuario.tarjetaValidoAnio > 99) {
+		valido = false;
+		formTarjetaValidoAnio.focus();
+		msgValidacionToastify("Ingrese un año válido (AA)");
+	} else if (usuario.tarjetaCodSeg < 100 || usuario.tarjetaCodSeg > 999) {
+		valido = false;
+		formTarjetaCodSeg.focus();
+		msgValidacionToastify("Ingrese un código de seguridad válido (NNN)");
+	}
+
+	return valido;
+};
+
+const msgValidacionToastify = (msg) => {
+	Toastify({
+		text: msg,
+		duration: 3000,
+		offset: { y: 120 },
+		style: {
+			background: "linear-gradient(to right, #DC0054, #DC6054)",
+		},
+	}).showToast();
 };
 
 // ******************** EVENTOS ******************** //
@@ -318,7 +452,7 @@ const containerCheckout = document.getElementById("tienda__containerCheckout");
 const containerCheckoutConfirma = document.getElementById("tienda__containerCheckoutConfirma");
 const formNombre = document.getElementById("tienda__formNombre");
 const formApellido = document.getElementById("tienda__formApellido");
-const formDNI = document.getElementById("tienda__formDNI");
+const formNroDocumento = document.getElementById("tienda__formNroDocumento");
 const formTelefono = document.getElementById("tienda__formTelefono");
 const formMail = document.getElementById("tienda__formMail");
 const formCalle = document.getElementById("tienda__formCalle");
@@ -367,6 +501,14 @@ const btnCheckout = () => {
 	containerProductos.classList.add("d-none");
 	containerMiCuenta.classList.add("d-none");
 	containerCarrito.classList.add("d-none");
+
+	let total = getTotalCompra();
+	formTarjetaCuotas.innerHTML = `
+		<option value="TCx01">1 cuota sin interés de $${parseFloat(total).toFixed(2)}</option>
+		<option value="TCx03">3 cuotas sin interés de $${parseFloat(total / 3).toFixed(2)}</option>
+		<option value="TCx06">6 cuotas sin interés de $${parseFloat(total / 6).toFixed(2)}</option>
+		<option value="TCx12">12 cuotas sin interés de $${parseFloat(total / 12).toFixed(2)}</option>`;
+
 	containerCheckout.classList.remove("d-none");
 	document.documentElement.scrollTop = 0;
 };
@@ -449,12 +591,12 @@ checkEnvio.onclick = () => {
 };
 
 const btnCheckoutConfirma = () => {
+	document.documentElement.scrollTop = 0;
 	let formOK = validarFormularioCheckout();
 	if (formOK) {
 		containerCheckout.classList.add("d-none");
 		renderContainerCheckoutConfirma();
 		containerCheckoutConfirma.classList.remove("d-none");
-		document.documentElement.scrollTop = 0;
 		carrito = [];
 		renderCarrito();
 	}
@@ -488,6 +630,25 @@ const clasificacionProductos = {
 	neoprene: 5,
 	reguladores: 6,
 	snorkels: 7,
+};
+
+let usuario = {
+	nombre: "",
+	apellido: "",
+	nroDocumento: 0,
+	telefono: 0,
+	mail: "",
+	calle: "",
+	numero: 0,
+	piso: "",
+	depto: "",
+	ciudad: "",
+	codigoPostal: 0,
+	tarjetaNumero: 0,
+	tarjetaNombre: "",
+	tarjetaValidoMes: 0,
+	tarjetaValidoAnio: 0,
+	tarjetaCodSeg: 0,
 };
 
 const productos = [];
