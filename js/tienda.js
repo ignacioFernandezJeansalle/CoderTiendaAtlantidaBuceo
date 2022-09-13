@@ -1,11 +1,8 @@
 // ******************** FUNCIONES ******************** //
 const getDBProductosJSON = async () => {
-	await fetch("../db/dbProductos.json")
-		.then((response) => response.json())
-		.then((data) => {
-			data.forEach((x) => productos.push(new Producto(x.id, x.marca, x.modelo, x.clasif, x.imgFile, x.alt, x.precio, x.stock)));
-			renderProductos(productos, selOrdenarPor.value);
-		});
+	const response = await fetch("../db/dbProductos.json");
+	const data = await response.json();
+	data.forEach((x) => productos.push(new Producto(x.id, x.marca, x.modelo, x.clasif, x.imgFile, x.alt, x.precio, x.stock)));
 };
 
 const filtrarProductos = () => {
@@ -27,7 +24,7 @@ const filtrarProductos = () => {
 	}
 };
 
-const renderProductos = (fProductos, fOrden) => {
+const orderProductos = (fProductos, fOrden) => {
 	switch (fOrden) {
 		case "ordenAZ":
 			fProductos.sort((itemA, itemB) => {
@@ -78,8 +75,13 @@ const renderProductos = (fProductos, fOrden) => {
 			});
 			break;
 	}
+	return fProductos;
+};
 
+const renderProductos = (fProductos, fOrden) => {
+	fProductos = orderProductos(fProductos, fOrden);
 	let container = "";
+
 	for (let i = 0; i < fProductos.length; i++) {
 		let auxDisponibilidad = "";
 
@@ -140,9 +142,21 @@ const eliminarDelCarrito = (fId, fI) => {
 };
 
 const actualizarStock = (fId, fCantidad) => {
-	for (let i = 0; i < productos.length; i++) {
-		if (productos[i].id === fId) {
-			productos[i].stock += fCantidad;
+	if (fId === 0 && fCantidad === 0) {
+		if (carrito.length > 0) {
+			carrito.forEach((x) => {
+				for (let i = 0; i < productos.length; i++) {
+					if (x.id === productos[i].id) {
+						productos[i].stock--;
+					}
+				}
+			});
+		}
+	} else {
+		for (let i = 0; i < productos.length; i++) {
+			if (productos[i].id === fId) {
+				productos[i].stock += fCantidad;
+			}
 		}
 	}
 };
@@ -212,8 +226,8 @@ const renderContainerCheckoutConfirma = () => {
 			<p>
 			`;
 
-	carrito.forEach((item) => {
-		container += `${item.marca} ${item.modelo} [$${item.precio}]<br />`;
+	carrito.forEach((x) => {
+		container += `${x.marca} ${x.modelo} [$${x.precio}]<br />`;
 	});
 
 	container += `<b>Total: $${total}</b> (`;
@@ -345,7 +359,6 @@ const msgValidacionToastify = (msg) => {
 };
 
 // ******************** EVENTOS ******************** //
-
 const containerProductos = document.getElementById("tienda_containerProductos");
 const containerMiCuenta = document.getElementById("tienda__containerMiCuenta");
 const containerCarrito = document.getElementById("tienda__containerCarrito");
@@ -504,7 +517,7 @@ const btnCheckoutConfirma = () => {
 };
 
 // ******************** MAIN ******************** //
-
+// Declaración de variables, clases y objetos
 class Producto {
 	constructor(id, marca, modelo, clasif, imgFile, alt, precio, stock) {
 		this.id = id;
@@ -520,7 +533,6 @@ class Producto {
 		return this.stock > 0 ? this.stock : 0;
 	}
 }
-
 const clasificacionProductos = {
 	aletas: 1,
 	chalecos: 2,
@@ -530,7 +542,6 @@ const clasificacionProductos = {
 	reguladores: 6,
 	snorkels: 7,
 };
-
 let usuario = {
 	nombre: "",
 	apellido: "",
@@ -549,11 +560,17 @@ let usuario = {
 	tarjetaValidoAnio: 0,
 	tarjetaCodSeg: 0,
 };
-
 const productos = [];
 let productosFiltrados = [];
 let carrito;
 
-getDBProductosJSON();
-getLocalStorage();
-renderCarrito();
+// Función main
+const main = async () => {
+	await getDBProductosJSON();
+	getLocalStorage();
+	renderCarrito();
+	actualizarStock(0, 0);
+	renderProductos(productos, selOrdenarPor.value);
+};
+
+main();

@@ -22,6 +22,8 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet" />
+		<!-- toastify -->
+		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
 		<!-- CSS Custom -->
 		<link rel="stylesheet" href="./css/styles.css" />
 	</head>
@@ -97,20 +99,20 @@
 				</div>
 
 				<!-- Formulario de contacto -->
-				<form class="welcome__form">
+				<form id="form" class="welcome__form d-none">
 					<fieldset>
 						<legend>Dejanos tu consulta</legend>
-						<input type="text" id="nombre" class="form-control" placeholder="Nombre" required />
-						<input type="email" id="email" class="form-control" placeholder="Correo electrónico" required />
-						<input type="number" id="telefono" class="form-control" placeholder="Teléfono" required />
-						<select id="motivo" class="form-select">
+						<input type="text" name="form__nombre" id="form__nombre" class="form-control" placeholder="Nombre" required />
+						<input type="email" name="form__email" id="form__email" class="form-control" placeholder="Correo electrónico" required />
+						<input type="number" name="form__telefono" id="form__telefono" class="form-control" placeholder="Teléfono" required />
+						<select name="form__motivo" id="form__motivo" class="form-select">
 							<option value="default">Motivo de consulta</option>
 							<option value="Cursos">Cursos</option>
 							<option value="Viajes">Viajes</option>
 							<option value="Otro">Otro</option>
 						</select>
-						<textarea class="form-control" id="consulta" placeholder="Escriba aquí su consulta..." required></textarea>
-						<input type="submit" class="btn btn-danger" />
+						<textarea class="form-control" name="form__consulta" id="form__consulta" placeholder="Escriba aquí su consulta..." required></textarea>
+						<input type="submit" id="button" value="Enviar" class="btn btn-danger" />
 					</fieldset>
 				</form>
 			</section>
@@ -248,5 +250,10 @@
 
 		<!-- JavaScript Bundle with Popper Bootstrap -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+		<!-- toastify -->
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+		<!-- EmailJS -->
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+		<script src="./js/emailJS.js"></script>
 	</body>
 </html>
