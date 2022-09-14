@@ -218,10 +218,7 @@ const renderContainerCheckoutConfirma = () => {
 		<div class="col-10 col-md-8 mb-2">
 			<h2 class="pt-4">TU COMPRA FUE CONFIRMADA!</h2>
 			<hr />
-			<p> 
-				Felicitaciones <b>${usuario.nombre} ${usuario.apellido}</b> por tu compra.<br />
-				Recibirás en tu correo <b>${usuario.mail}</b> un resumen de la compra que acabás de realizar.
-			</p>
+			<p>Felicitaciones <b>${usuario.nombre} ${usuario.apellido}</b> por tu compra.</p>
 			<hr />
 			<p>
 			`;
