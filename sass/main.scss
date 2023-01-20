@@ -1,19 +1,20 @@
 // Archivo principal   ---   sass --watch sass/main.scss css/styles.css
 
-@import 'utilities/variables';
-@import 'utilities/mixins';
+@import "utilities/variables";
+@import "utilities/mixins";
 
-@import 'base/reset';
-@import 'base/typo';
-@import 'base/common';
+@import "base/reset";
+@import "base/typo";
+@import "base/common";
 
-@import 'layout/header';
-@import 'layout/footer';
+@import "layout/header";
+@import "layout/footer";
 
-@import 'components/buttons';
+@import "components/buttons";
 
-@import 'pages/home';
-@import 'pages/cursos';
-@import 'pages/viajes';
-@import 'pages/nosotros';
-@import 'pages/contacto';
+@import "pages/home";
+@import "pages/cursos";
+@import "pages/viajes";
+@import "pages/tienda";
+@import "pages/nosotros";
+@import "pages/contacto";
