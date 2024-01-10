@@ -569,7 +569,7 @@ let usuario = {
 };
 const productos = [];
 let productosFiltrados = [];
-let carrito;
+let carrito = [];
 
 // Función main
 const main = () => {
