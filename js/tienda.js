@@ -217,7 +217,7 @@ const setLocalStorage = () => {
 
 const getLocalStorage = () => {
   const carritoJSONGet = JSON.parse(localStorage.getItem("carritoJSON"));
-  carrito = [...carritoJSONGet] || [];
+  carritoJSONGet !== null ? (carrito = [...carritoJSONGet]) : (carrito = []);
 };
 
 const renderContainerCheckoutConfirma = () => {
@@ -569,7 +569,7 @@ let usuario = {
 };
 const productos = [];
 let productosFiltrados = [];
-let carrito = [];
+let carrito;
 
 // Función main
 const main = () => {
